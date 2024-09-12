@@ -1,4 +1,4 @@
 const Missing = () => {
-   return <div>Missing</div>;
+   return <div>Missing Page</div>;
 };
 export default Missing;

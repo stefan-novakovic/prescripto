@@ -1,4 +1,4 @@
 const Doctors = () => {
-   return <div>Doctors</div>;
+   return <div>Doctors Page</div>;
 };
 export default Doctors;
