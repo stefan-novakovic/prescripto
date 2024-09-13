@@ -8,6 +8,11 @@ export default {
          },
          gridTemplateColumns: {
             auto: 'repeat(auto-fill, minmax(200px, 1fr))'
+         },
+         screens: {
+            c578: '578px',
+            c640: '640px',
+            c825: '825px'
          }
       }
    },

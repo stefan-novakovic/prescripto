@@ -8,7 +8,7 @@ const SpecialityMenu = () => {
          <p className="sm:w-1/3 text-center text-sm">
             Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
          </p>
-         <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-x-scroll">
+         <div className="flex c578:justify-center c640:justify-start c825:justify-center gap-4 pt-5 w-full overflow-x-scroll">
             {specialityData.map((item, index) => (
                <Link
                   onClick={() => scrollTo(0, 0)}
