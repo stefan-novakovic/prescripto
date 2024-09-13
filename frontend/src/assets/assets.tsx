@@ -93,7 +93,7 @@ export const specialityData: Speciality[] = [
    }
 ];
 
-type Doctor = {
+export type Doctor = {
    _id: string;
    name: string;
    image: string;
