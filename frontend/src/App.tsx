@@ -9,6 +9,7 @@ import MyAppointments from './pages/MyAppointments';
 import Appointment from './pages/Appointment';
 import Missing from './pages/Missing';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 const App = () => {
    return (
@@ -29,6 +30,8 @@ const App = () => {
                <Route path="*" element={<Missing />} />
             </Route>
          </Routes>
+
+         <Footer />
       </div>
    );
 };
