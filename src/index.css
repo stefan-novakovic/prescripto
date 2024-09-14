@@ -12,6 +12,6 @@
    @apply bg-primary;
 }
 
-::-webkit-scrollbar {
+#specialityMenu::-webkit-scrollbar {
    @apply hidden;
 }
