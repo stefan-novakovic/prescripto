@@ -3,12 +3,14 @@ import { doctors, Doctor } from '../assets/assets';
 
 type AppContextType = {
    doctors: Doctor[];
+   currencySymbol: string;
 };
 
-export const AppContext = createContext<AppContextType>({ doctors: [] });
+export const AppContext = createContext<AppContextType>({ doctors: [], currencySymbol: '' });
 
 const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }) => {
-   return <AppContext.Provider value={{ doctors }}>{children}</AppContext.Provider>;
+   const currencySymbol: string = '$';
+   return <AppContext.Provider value={{ doctors, currencySymbol }}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;
