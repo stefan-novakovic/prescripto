@@ -1,4 +1,4 @@
 const Login = () => {
-   return <div>Login Page</div>;
+   return <div className="flex flex-1 flex-col">Login Page</div>;
 };
 export default Login;

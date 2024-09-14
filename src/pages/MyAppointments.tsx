@@ -1,4 +1,4 @@
 const MyAppointments = () => {
-   return <div>MyAppointments Page</div>;
+   return <div className="flex flex-1 flex-col">MyAppointments Page</div>;
 };
 export default MyAppointments;

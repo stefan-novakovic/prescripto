@@ -1,4 +1,4 @@
 const Contact = () => {
-   return <div>Contact Page</div>;
+   return <div className="flex flex-1 flex-col">Contact Page</div>;
 };
 export default Contact;

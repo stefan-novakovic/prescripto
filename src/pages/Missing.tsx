@@ -1,4 +1,4 @@
 const Missing = () => {
-   return <div>Missing Page</div>;
+   return <div className="flex flex-1 flex-col">Missing Page</div>;
 };
 export default Missing;

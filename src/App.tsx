@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 
 const App = () => {
    return (
-      <div className="mx-4 sm:mx-[10%]">
+      <div className="flex flex-col min-h-[100vh] mx-4 sm:mx-[10%]">
          <Navbar />
 
          <Routes>

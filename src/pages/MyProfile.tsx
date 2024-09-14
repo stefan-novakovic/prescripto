@@ -1,4 +1,4 @@
 const MyProfile = () => {
-   return <div>MyProfile Page</div>;
+   return <div className="flex flex-1 flex-col">MyProfile Page</div>;
 };
 export default MyProfile;
