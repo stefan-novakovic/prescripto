@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useAppContext from '../hooks/useAppContext';
 import { assets, Doctor } from '../assets/assets';
+import RelatedDoctors from '../components/RelatedDoctors';
 
 const Appointment = () => {
    type Slots = { datetime: Date; time: string };
@@ -195,6 +196,9 @@ const Appointment = () => {
                   Book an appointment
                </button>
             </div>
+
+            {/* ----- Listing Related Doctors ----- */}
+            <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
          </div>
       )
    );
