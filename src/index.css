@@ -12,6 +12,8 @@
    @apply bg-primary;
 }
 
-#specialityMenu::-webkit-scrollbar {
+#specialityMenu::-webkit-scrollbar,
+#bookingSlots::-webkit-scrollbar,
+#bookingSlotsTimes::-webkit-scrollbar {
    @apply hidden;
 }
