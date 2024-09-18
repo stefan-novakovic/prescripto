@@ -21,7 +21,7 @@ const Login = () => {
    };
    return (
       <section className="flex flex-1 flex-col justify-center">
-         <form className="flex items-center min-h-[80vh] mt-5 mb-10" onSubmit={handleSubmit}>
+         <form className="flex items-center min-h-[75vh] mt-5 mb-10" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[288px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
                <p className="text-2xl font-semibold">{state === 'Sign up' ? 'Create Account' : 'Login'}</p>
                <p>Please {state === 'Sign up' ? 'sign up' : 'log in'} to book appointment</p>
