@@ -80,7 +80,7 @@ const Navbar = () => {
             {/* ----- Mobile Menu ----- */}
             <div
                id="mobileMenu"
-               className={`translate-x-[101%] ${showMenu ? 'translate-x-[0%]' : ''} fixed w-full md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[650ms]`}
+               className={`${showMenu ? 'translate-x-[0%]' : 'translate-x-[101%]'} fixed w-full md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[650ms]`}
             >
                <div className="flex items-center justify-between pl-4 pr-[14px] py-[21.55px]">
                   <img
