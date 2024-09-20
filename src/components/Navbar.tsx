@@ -5,7 +5,7 @@ import { assets } from '../assets/assets';
 const Navbar = () => {
    const navigate: NavigateFunction = useNavigate();
 
-   // const [showMenu, setShowMenu] = useState<boolean>(false);
+   const [showMenu, setShowMenu] = useState<boolean>(false);
    const [token, setToken] = useState<boolean>(true);
 
    return (
@@ -69,6 +69,38 @@ const Navbar = () => {
                   Create account
                </button>
             )}
+            <div className="flex items-center">
+               <img
+                  onClick={() => setShowMenu((prev) => !prev)}
+                  className="w-6 md:hidden h-min"
+                  src={assets.menu_icon}
+                  alt=""
+               />
+            </div>
+            {/* ----- Mobile Menu ----- */}
+            <div
+               id="mobileMenu"
+               className={`${showMenu ? 'fixed w-full' : 'fixed w-full translate-x-[101%]'} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[700ms]`}
+            >
+               <div className="flex items-center justify-between pl-4 pr-[14px] py-[21.55px]">
+                  <img onClick={() => navigate('/')} className="w-40 cursor-pointer" src={assets.logo} alt="" />
+                  <img className="w-7" onClick={() => setShowMenu(false)} src={assets.cross_icon} alt="" />
+               </div>
+               <ul className="flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium">
+                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/">
+                     HOME
+                  </NavLink>
+                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/doctors">
+                     ALL DOCTORS
+                  </NavLink>
+                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/about">
+                     ABOUT
+                  </NavLink>
+                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/contact">
+                     CONTACT
+                  </NavLink>
+               </ul>
+            </div>
          </div>
       </section>
    );
