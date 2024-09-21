@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 const Login = () => {
-   const [state, setState] = useState<string>('Login');
+   const [state, setState] = useState<string>('Sign up');
    const [name, setName] = useState<string>('');
    const [password, setPassword] = useState({
       value: '',

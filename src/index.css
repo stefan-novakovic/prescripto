@@ -8,14 +8,18 @@
    font-optical-sizing: auto;
 }
 
-.active > hr {
-   @apply bg-primary;
-}
-
 #specialityMenu::-webkit-scrollbar,
 #bookingSlots::-webkit-scrollbar,
 #bookingSlotsTimes::-webkit-scrollbar {
    @apply hidden;
+}
+
+#navMenu a.active > hr {
+   @apply bg-primary;
+}
+
+#mobileNavMenu ul > a.active {
+   @apply text-white bg-primary;
 }
 
 .react-datepicker__navigation--years {
@@ -44,10 +48,4 @@
 .react-datepicker__navigation--years.react-datepicker__navigation--years-previous {
    top: 4px;
    border-top-color: #ccc;
-}
-
-@media screen and (max-width: 768px) {
-   #mobileMenu ul a.active {
-      @apply text-white bg-primary;
-   }
 }

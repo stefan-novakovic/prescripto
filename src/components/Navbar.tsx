@@ -13,7 +13,7 @@ const Navbar = () => {
       <section className="h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400">
          <img onClick={() => navigate('/')} className="w-40 lg:w-44 py-4 cursor-pointer" src={assets.logo} alt="" />
 
-         <ul className="hidden c825:flex items-start gap-3 lg:gap-5 py-4 font-medium">
+         <ul id="navMenu" className="hidden c825:flex items-start gap-3 lg:gap-5 py-4 font-medium">
             <NavLink to="/">
                <li className="py-1 text-center">HOME</li>
                <hr className="border-none outline-none h-0.5 bg-transparent w-4/5 m-auto" />
@@ -90,7 +90,7 @@ const Navbar = () => {
             </div>
             {/* ----- Mobile Menu ----- */}
             <div
-               id="mobileMenu"
+               id="mobileNavMenu"
                className={`${showMenu ? 'translate-x-[0%]' : 'translate-x-[101%]'} fixed w-full c825:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[650ms]`}
             >
                <div className="flex items-center justify-between pl-4 pr-[14px] py-[21.55px]">
@@ -105,17 +105,33 @@ const Navbar = () => {
                   />
                   <img className="w-7" onClick={() => setShowMenu(false)} src={assets.cross_icon} alt="" />
                </div>
-               <ul className="flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium">
-                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/">
+               <ul className="flex flex-col items-center gap-2 mt-5 px-5 text-lg md:text-xl font-medium">
+                  <NavLink
+                     className="px-4 py-2 md:tracking-wider rounded inline-block"
+                     onClick={() => setShowMenu(false)}
+                     to="/"
+                  >
                      HOME
                   </NavLink>
-                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/doctors">
+                  <NavLink
+                     className="px-4 py-2 md:tracking-wider rounded inline-block"
+                     onClick={() => setShowMenu(false)}
+                     to="/doctors"
+                  >
                      ALL DOCTORS
                   </NavLink>
-                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/about">
+                  <NavLink
+                     className="px-4 py-2 md:tracking-wider rounded inline-block"
+                     onClick={() => setShowMenu(false)}
+                     to="/about"
+                  >
                      ABOUT
                   </NavLink>
-                  <NavLink className="px-4 py-2 rounded inline-block" onClick={() => setShowMenu(false)} to="/contact">
+                  <NavLink
+                     className="px-4 py-2 md:tracking-wider rounded inline-block"
+                     onClick={() => setShowMenu(false)}
+                     to="/contact"
+                  >
                      CONTACT
                   </NavLink>
                </ul>
