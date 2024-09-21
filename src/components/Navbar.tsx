@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useNavigate, NavigateFunction } from 'react-router-dom';
+import { MdAccountCircle } from 'react-icons/md';
 import { assets } from '../assets/assets';
 
 const Navbar = () => {
@@ -9,10 +10,10 @@ const Navbar = () => {
    const [token, setToken] = useState<boolean>(true);
 
    return (
-      <section className="h-[77px] flex items-center justify-between text-sm mb-5 border-b border-b-gray-400">
+      <section className="h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400">
          <img onClick={() => navigate('/')} className="w-40 lg:w-44 py-4 cursor-pointer" src={assets.logo} alt="" />
 
-         <ul className="hidden md:flex items-start gap-3 lg:gap-5 py-4 font-medium">
+         <ul className="hidden c825:flex items-start gap-3 lg:gap-5 py-4 font-medium">
             <NavLink to="/">
                <li className="py-1 text-center">HOME</li>
                <hr className="border-none outline-none h-0.5 bg-transparent w-4/5 m-auto" />
@@ -31,48 +32,58 @@ const Navbar = () => {
             </NavLink>
          </ul>
 
-         <div className="flex item-center gap-4">
-            {token ? (
-               <div className="flex items-center gap-2 cursor-pointer group relative pb-6 mt-6">
-                  <img className="w-8 rounded-full" src={assets.profile_pic} alt="" />
-                  <img className="w-2.5" src={assets.dropdown_icon} alt="" />
-                  <div
-                     className={`absolute top-14 right-0 text-base font-medium text-gray-600 z-20 delay-200 invisible group-hover:delay-0 group-hover:visible`}
-                  >
-                     <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4">
-                        <p onClick={() => navigate('/my-profile')} className="hover:text-black hover:cursor-pointer">
-                           My profile
-                        </p>
-                        <p
-                           onClick={() => navigate('/my-appointments')}
-                           className="hover:text-black hover:cursor-pointer"
-                        >
-                           My appointments
-                        </p>
-                        <p
-                           onClick={() => {
-                              setToken(false);
-                              navigate('/');
-                           }}
-                           className="hover:text-black hover:cursor-pointer"
-                        >
-                           Logout
-                        </p>
+         <div className="flex item-center gap-4 c825:gap-0">
+            <div className="w-auto c825:w-[135.38px] lg:w-[159.38px]">
+               {token ? (
+                  <div className="float-end flex items-center gap-2 cursor-pointer group relative pb-6 mt-6">
+                     <img className="w-8 rounded-full" src={assets.profile_pic} alt="" />
+                     <img className="w-2.5" src={assets.dropdown_icon} alt="" />
+                     <div
+                        className={`absolute top-14 right-0 text-base font-medium text-gray-600 z-20 delay-200 invisible group-hover:delay-0 group-hover:visible`}
+                     >
+                        <div className="min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4">
+                           <p onClick={() => navigate('/my-profile')} className="hover:text-black hover:cursor-pointer">
+                              My profile
+                           </p>
+                           <p
+                              onClick={() => navigate('/my-appointments')}
+                              className="hover:text-black hover:cursor-pointer"
+                           >
+                              My appointments
+                           </p>
+                           <p
+                              onClick={() => {
+                                 setToken(false);
+                                 navigate('/');
+                              }}
+                              className="hover:text-black hover:cursor-pointer"
+                           >
+                              Logout
+                           </p>
+                        </div>
                      </div>
                   </div>
-               </div>
-            ) : (
-               <button
-                  onClick={() => navigate('/login')}
-                  className="bg-primary text-white px-5 lg:px-8 py-3 rounded-full font-light hidden md:block"
-               >
-                  Create account
-               </button>
-            )}
+               ) : (
+                  <>
+                     <button
+                        onClick={() => navigate('/login')}
+                        className="float-end bg-primary text-white px-5 lg:px-8 py-3 rounded-full font-light hidden c825:block"
+                     >
+                        Create account
+                     </button>
+                     <button
+                        onClick={() => navigate('/login')}
+                        className="text-[#000B6D] mr-[15px] rounded-full block c825:hidden"
+                     >
+                        <MdAccountCircle size={38} />
+                     </button>
+                  </>
+               )}
+            </div>
             <div className="flex items-center">
                <img
                   onClick={() => setShowMenu((prev) => !prev)}
-                  className="w-6 md:hidden h-min"
+                  className="w-6 c825:hidden h-min"
                   src={assets.menu_icon}
                   alt=""
                />
@@ -80,7 +91,7 @@ const Navbar = () => {
             {/* ----- Mobile Menu ----- */}
             <div
                id="mobileMenu"
-               className={`${showMenu ? 'translate-x-[0%]' : 'translate-x-[101%]'} fixed w-full md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[650ms]`}
+               className={`${showMenu ? 'translate-x-[0%]' : 'translate-x-[101%]'} fixed w-full c825:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[650ms]`}
             >
                <div className="flex items-center justify-between pl-4 pr-[14px] py-[21.55px]">
                   <img
