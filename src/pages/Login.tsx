@@ -97,7 +97,7 @@ const Login = () => {
                            setState('Login');
                            resetInputs();
                         }}
-                        className="text-primary underline cursor-pointer"
+                        className="text-primary underline cursor-pointer whitespace-nowrap"
                      >
                         Login here
                      </span>
@@ -110,7 +110,7 @@ const Login = () => {
                            setState('Sign up');
                            resetInputs();
                         }}
-                        className="text-primary underline cursor-pointer"
+                        className="text-primary underline cursor-pointer whitespace-nowrap"
                      >
                         Click here
                      </span>
