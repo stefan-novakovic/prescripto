@@ -7,15 +7,18 @@ const Doctors = () => {
    const { speciality } = useParams<string>();
    const [filterDoc, setFilterDoc] = useState<Doctor[]>([]);
    const [showFilter, setShowFilter] = useState<boolean>(false);
+   const [loading, setLoading] = useState<boolean>(true);
    const { doctors } = useAppContext();
    const navigate: NavigateFunction = useNavigate();
 
    const applyFilter = () => {
+      setLoading(true);
       if (speciality) {
          setFilterDoc(doctors.filter((doctor) => doctor.speciality === speciality));
       } else {
          setFilterDoc(doctors);
       }
+      setLoading(false);
    };
 
    useEffect(() => {
@@ -24,7 +27,7 @@ const Doctors = () => {
    return (
       <div className="flex flex-1 flex-col">
          <p className="text-gray-600">Browse through the doctors specialist.</p>
-         <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
+         <div className="flex flex-col sm:flex-row items-stretch gap-5 mt-5">
             <button
                className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ''}`}
                onClick={() => setShowFilter((prev) => !prev)}
@@ -85,29 +88,40 @@ const Doctors = () => {
                   Gastroenterologist
                </p>
             </div>
-            <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
-               {filterDoc
-                  .sort((a, b) => (a.name > b.name ? 1 : -1))
-                  .map((doctor, index) => (
-                     <div
-                        key={index}
-                        onClick={() => navigate(`/appointment/${doctor._id}`)}
-                        className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
-                     >
-                        <img className="bg-blue-50" src={doctor.image} alt="" />
-                        <div className="p-4">
-                           <div className="flex items-center gap-2 text-sm text-center text-green-500">
-                              <div className="w-2 h-2 bg-green-500 rounded-full" />
-                              <p>Available</p>
+            {loading ? (
+               <div className="flex justify-center items-center w-full mt-4 sm:mt-0 px-8 text-center font-semibold tracking-wide">
+                  Loading doctors...
+               </div>
+            ) : filterDoc.length > 0 ? (
+               <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
+                  {filterDoc
+                     .sort((a, b) => (a.name > b.name ? 1 : -1))
+                     .map((doctor, index) => (
+                        <div
+                           key={index}
+                           onClick={() => navigate(`/appointment/${doctor._id}`)}
+                           className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+                        >
+                           <img className="bg-blue-50" src={doctor.image} alt="" />
+                           <div className="p-4">
+                              <div className="flex items-center gap-2 text-sm text-center text-green-500">
+                                 <div className="w-2 h-2 bg-green-500 rounded-full" />
+                                 <p>Available</p>
+                              </div>
+                              <p className="text-gray-900 text-lg font-medium">{doctor.name}</p>
+                              <p className="text-gray-600 text-sm">{doctor.speciality}</p>
                            </div>
-                           <p className="text-gray-900 text-lg font-medium">{doctor.name}</p>
-                           <p className="text-gray-600 text-sm">{doctor.speciality}</p>
                         </div>
-                     </div>
-                  ))}
-            </div>
+                     ))}
+               </div>
+            ) : (
+               <div className="flex justify-center items-center w-full mt-4 sm:mt-0 px-8 text-center font-semibold text-red-600 tracking-wide">
+                  The doctor speciality provided in the URL does not exist.
+               </div>
+            )}
          </div>
       </div>
    );
 };
+
 export default Doctors;
