@@ -18,9 +18,7 @@ const Doctors = () => {
       } else {
          setFilterDoc(doctors);
       }
-      setTimeout(() => {
-         setLoading(false);
-      }, 3000);
+      setLoading(false);
    };
 
    useEffect(() => {
