@@ -18,7 +18,9 @@ const Doctors = () => {
       } else {
          setFilterDoc(doctors);
       }
-      setLoading(false);
+      setTimeout(() => {
+         setLoading(false);
+      }, 3000);
    };
 
    useEffect(() => {
@@ -89,7 +91,7 @@ const Doctors = () => {
                </p>
             </div>
             {loading ? (
-               <div className="flex justify-center items-center w-full mt-4 sm:mt-0 px-8 text-center font-semibold tracking-wide">
+               <div className="flex justify-center items-center w-full min-h-[72px] mt-[9.375rem] sm:mt-0 px-8 text-center font-semibold tracking-wide">
                   Loading doctors...
                </div>
             ) : filterDoc.length > 0 ? (
@@ -115,7 +117,7 @@ const Doctors = () => {
                      ))}
                </div>
             ) : (
-               <div className="flex justify-center items-center w-full mt-4 sm:mt-0 px-8 text-center font-semibold text-red-600 tracking-wide">
+               <div className="flex justify-center items-center w-full min-h-[72px] mt-[9.375rem] sm:mt-0 px-8 text-center font-semibold text-red-600 tracking-wide">
                   The doctor speciality provided in the URL does not exist.
                </div>
             )}
