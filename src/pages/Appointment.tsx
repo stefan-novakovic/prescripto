@@ -106,12 +106,12 @@ const Appointment = () => {
       docInfo && (
          <div className="flex flex-1 flex-col">
             {/* ----- Doctor Details ----- */}
-            <div className="flex flex-col sm:flex-row gap-4">
-               <div>
-                  <img className="bg-primary w-full sm:max-w-72 rounded-lg" src={docInfo.image} alt="" />
+            <div className="flex flex-col md:flex-row gap-4">
+               <div className="flex justify-center w-full h-min md:w-auto bg-primary rounded-lg">
+                  <img className="w-full max-w-[411px] md:max-w-72" src={docInfo.image} alt="" />
                </div>
 
-               <div className="flex-1 max-w-[780px] border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
+               <div className="flex-1 max-w-[780px] border border-gray-400 rounded-b-lg md:rounded-lg p-8 py-7 bg-white mt-[-24px] md:mt-0">
                   {/* ----- Doctor Info: name, degree, experience ----- */}
                   <p className="flex items-center gap-2 text-2xl font-medium text-gray-900">
                      {docInfo.name}
@@ -142,7 +142,7 @@ const Appointment = () => {
             </div>
 
             {/* ----- Booking slots ----- */}
-            <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+            <div className="md:ml-72 md:pl-4 mt-4 font-medium text-gray-700">
                <p>Booking slots</p>
                <div id="bookingSlots" className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
                   {docSlots.length &&
