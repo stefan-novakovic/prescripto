@@ -279,7 +279,7 @@ export const doctors: Doctor[] = [
    },
    {
       _id: 'doc13',
-      name: 'Dr. Chloe ',
+      name: 'Dr. Chloe Evans',
       image: doc13,
       speciality: 'General physician',
       degree: 'MBBS',
