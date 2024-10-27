@@ -1,8 +1,11 @@
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { assets } from '../assets/assets';
+import useAppContext from '../hooks/useAppContext';
 
 const Banner = () => {
    const navigate: NavigateFunction = useNavigate();
+
+   const { token } = useAppContext();
 
    return (
       <section className="flex bg-primary rounded-lg px-6 sm:px-10 md:px-14 lg:px-12 my-20 md:mx-10">
@@ -14,8 +17,7 @@ const Banner = () => {
             </div>
             <button
                onClick={() => {
-                  navigate('/login');
-                  scrollTo(0, 0);
+                  !token ? (navigate('/login'), scrollTo(0, 0)) : scrollTo(0, 0);
                }}
                className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
             >
