@@ -43,7 +43,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
    const [aToken, setAToken] = useState<string | null>(
       localStorage.getItem('aToken') ? localStorage.getItem('aToken') : null
    );
-   const [doctors, setDoctors] = useState([]);
+   const [doctors, setDoctors] = useState<Doctor[]>([]);
    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
    const getAllDoctors = async () => {

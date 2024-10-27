@@ -2,12 +2,20 @@ import { useState } from 'react';
 import { NavLink, useNavigate, NavigateFunction } from 'react-router-dom';
 import { MdAccountCircle } from 'react-icons/md';
 import { assets } from '../assets/assets';
+import useAppContext from '../hooks/useAppContext';
 
 const Navbar = () => {
    const navigate: NavigateFunction = useNavigate();
 
    const [showMenu, setShowMenu] = useState<boolean>(false);
-   const [token, setToken] = useState<boolean>(true);
+
+   const { token, setToken } = useAppContext();
+
+   const logout = () => {
+      setToken('');
+      localStorage.removeItem('token');
+      navigate('/');
+   };
 
    return (
       <section className="h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400">
@@ -51,13 +59,7 @@ const Navbar = () => {
                            >
                               My appointments
                            </p>
-                           <p
-                              onClick={() => {
-                                 setToken(false);
-                                 navigate('/');
-                              }}
-                              className="hover:text-black hover:cursor-pointer"
-                           >
+                           <p onClick={logout} className="hover:text-black hover:cursor-pointer">
                               Logout
                            </p>
                         </div>
