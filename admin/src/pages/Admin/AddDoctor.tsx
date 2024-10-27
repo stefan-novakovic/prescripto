@@ -91,15 +91,15 @@ const AddDoctor = () => {
       <form onSubmit={onSubmitHandler} className="mx-5 my-4 w-full">
          <p className="mb-3 text-lg font-medium">Add Doctor</p>
 
-         <div className="bg-white p-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
+         <div className="bg-white p-8 border rounded w-full max-w-6xl max-h-[calc(100vh-61px-32px-40px)] sm:max-h-[calc(100vh-62.86px-32px-40px)] overflow-y-scroll">
             <div className="flex items-center gap-4 mb-8 text-gray-500">
-               <label className="block w-16 h-16" htmlFor="doc-img">
+               <div className="w-16 h-16">
                   <img
                      className="w-16 bg-gray-100 rounded-full cursor-pointer"
                      src={docImg ? URL.createObjectURL(docImg) : assets.upload_area}
                      alt=""
                   />
-               </label>
+               </div>
                <input
                   onChange={(e) => e.target.files && setDocImg(e.target.files[0])}
                   type="file"
@@ -107,9 +107,9 @@ const AddDoctor = () => {
                   id="doc-img"
                   hidden
                />
-               <p>
+               <label className="block cursor-pointer" htmlFor="doc-img">
                   Upload doctor <br /> picture
-               </p>
+               </label>
             </div>
 
             <div className="flex flex-col lg:flex-row items-start gap-10 text-gray-600">
