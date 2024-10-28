@@ -93,13 +93,13 @@ const AddDoctor = () => {
 
          <div className="bg-white p-8 border rounded w-full max-w-6xl max-h-[calc(100vh-61px-32px-40px)] sm:max-h-[calc(100vh-62.86px-32px-40px)] overflow-y-scroll">
             <div className="flex items-center gap-4 mb-8 text-gray-500">
-               <div className="w-16 h-16">
+               <label htmlFor="doc-img" className="block w-16 h-16">
                   <img
                      className="w-16 bg-gray-100 rounded-full cursor-pointer"
                      src={docImg ? URL.createObjectURL(docImg) : assets.upload_area}
                      alt=""
                   />
-               </div>
+               </label>
                <input
                   onChange={(e) => e.target.files && setDocImg(e.target.files[0])}
                   type="file"
@@ -257,6 +257,7 @@ const AddDoctor = () => {
                         name="doc-address2"
                         id="doc-address2"
                         placeholder="Address 2"
+                        required
                      />
                   </div>
                </div>
