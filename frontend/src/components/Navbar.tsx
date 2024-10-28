@@ -9,7 +9,7 @@ const Navbar = () => {
 
    const [showMenu, setShowMenu] = useState<boolean>(false);
 
-   const { token, setToken } = useAppContext();
+   const { token, setToken, userData } = useAppContext();
 
    const logout = () => {
       setToken('');
@@ -42,9 +42,9 @@ const Navbar = () => {
 
          <div className="flex item-center gap-4 c825:gap-0">
             <div className="w-auto c825:w-[135.38px] lg:w-[159.38px]">
-               {token ? (
+               {token && userData ? (
                   <div className="float-end flex items-center gap-2 cursor-pointer group relative pb-6 mt-6">
-                     <img className="w-8 rounded-full" src={assets.profile_pic} alt="" />
+                     <img className="w-8 rounded-full" src={userData.image} alt="" />
                      <img className="w-2.5" src={assets.dropdown_icon} alt="" />
                      <div
                         className={`absolute top-14 right-0 text-base font-medium text-gray-600 z-20 delay-200 invisible group-hover:delay-0 group-hover:visible`}

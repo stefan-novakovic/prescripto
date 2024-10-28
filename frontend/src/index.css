@@ -22,6 +22,10 @@
    @apply text-white bg-primary;
 }
 
+.react-datepicker-popper {
+   transform: translate(-63.5px, 30px) !important;
+}
+
 .react-datepicker__navigation--years {
    background: none;
    line-height: 1.7rem;
@@ -48,4 +52,12 @@
 .react-datepicker__navigation--years.react-datepicker__navigation--years-previous {
    top: 4px;
    border-top-color: #ccc;
+}
+
+.react-datepicker__header > h2 {
+   margin-bottom: 4px;
+}
+
+.react-datepicker__year-dropdown--scrollable {
+   height: 180px;
 }
