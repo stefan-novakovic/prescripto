@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Doctor } from '../assets/assets';
 
 type UserData = {
    _id: string;
@@ -15,8 +14,28 @@ type UserData = {
    __v: number;
 };
 
+export type Doctor = {
+   _id: string;
+   name: string;
+   image: string;
+   speciality: string;
+   degree: string;
+   experience: string;
+   about: string;
+   available: boolean;
+   fees: number;
+   address: {
+      line1: string;
+      line2: string;
+   };
+   date: number;
+   slots_booked: { [key: string]: string[] };
+   __v: number;
+};
+
 type AppContextType = {
    doctors: Doctor[];
+   getDoctorsData: () => Promise<void>;
    currencySymbol: string;
    token: string | null;
    setToken: React.Dispatch<React.SetStateAction<string | null>>;
@@ -28,6 +47,7 @@ type AppContextType = {
 
 export const AppContext = createContext<AppContextType>({
    doctors: [],
+   getDoctorsData: async () => {},
    currencySymbol: '',
    token: null,
    setToken: () => {},
@@ -99,7 +119,17 @@ const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }
 
    return (
       <AppContext.Provider
-         value={{ doctors, currencySymbol, token, setToken, backendUrl, userData, setUserData, loadUserProfileData }}
+         value={{
+            doctors,
+            getDoctorsData,
+            currencySymbol,
+            token,
+            setToken,
+            backendUrl,
+            userData,
+            setUserData,
+            loadUserProfileData
+         }}
       >
          {children}
       </AppContext.Provider>
