@@ -2,7 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-type UserData = {
+export type UserData = {
    _id: string;
    name: string;
    image: string;
