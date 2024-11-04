@@ -185,6 +185,42 @@ const listAppointment = async (req, res) => {
   }
 };
 
+// API to cancel appointment
+const cancelAppointment = async (req, res) => {
+  try {
+    const { userId, appointmentId } = req.body;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    // Verify appointment user
+    if (appointmentData.userId !== userId) {
+      return res.json({ success: false, message: "Unauthorized action" });
+    }
+
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      cancelled: true,
+    });
+
+    // Making doctor slot available again
+    const { docId, slotDate, slotTime } = appointmentData;
+
+    const doctorData = await doctorModel.findById(docId);
+
+    let slotsBooked = doctorData.slots_booked;
+
+    slotsBooked[slotDate] = slotsBooked[slotDate].filter(
+      (itemSlotTime) => itemSlotTime !== slotTime
+    );
+
+    await doctorModel.findByIdAndUpdate(docId, { slots_booked: slotsBooked });
+
+    res.json({ success: true, message: "Appointment cancelled" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -192,4 +228,5 @@ export {
   updateProfile,
   bookAppointment,
   listAppointment,
+  cancelAppointment,
 };
