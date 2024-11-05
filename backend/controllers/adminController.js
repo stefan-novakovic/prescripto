@@ -3,6 +3,7 @@ import bcript from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import jwt from "jsonwebtoken";
+import appointmentModel from "../models/appointmentModel.js";
 
 // API for adding doctor
 const addDoctor = async (req, res) => {
@@ -106,7 +107,7 @@ const loginAdmin = async (req, res) => {
 };
 
 // API to get all doctors list for admin panel
-const allDoctors = async (req, res) => {
+const allDoctors = async (_, res) => {
   try {
     const doctors = await doctorModel.find({}).select("-password");
     res.json({ success: true, doctors });
@@ -116,4 +117,52 @@ const allDoctors = async (req, res) => {
   }
 };
 
-export { addDoctor, loginAdmin, allDoctors };
+// API to get all appointments list
+const appointmentsAdmin = async (_, res) => {
+  try {
+    const appointments = await appointmentModel.find({});
+    res.json({ success: true, appointments });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// API to appointment cancellation
+const appointmentCancel = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      cancelled: true,
+    });
+
+    // Making doctor slot available again
+    const { docId, slotDate, slotTime } = appointmentData;
+
+    const doctorData = await doctorModel.findById(docId);
+
+    let slotsBooked = doctorData.slots_booked;
+
+    slotsBooked[slotDate] = slotsBooked[slotDate].filter(
+      (itemSlotTime) => itemSlotTime !== slotTime
+    );
+
+    await doctorModel.findByIdAndUpdate(docId, { slots_booked: slotsBooked });
+
+    res.json({ success: true, message: "Appointment cancelled" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export {
+  addDoctor,
+  loginAdmin,
+  allDoctors,
+  appointmentsAdmin,
+  appointmentCancel,
+};
