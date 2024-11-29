@@ -49,6 +49,13 @@ type Appointment = {
    __v: number;
 };
 
+type DashData = {
+   doctors: number;
+   appointments: number;
+   patients: number;
+   latestAppointments: Appointment[];
+};
+
 type AdminContextType = {
    aToken: string | null;
    setAToken: React.Dispatch<React.SetStateAction<string | null>>;
@@ -60,6 +67,8 @@ type AdminContextType = {
    setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
    getAllAppointments: () => Promise<void>;
    cancelAppointment: (appointmentId: string) => Promise<void>;
+   dashData: DashData | null;
+   getDashData: () => Promise<void>;
 };
 
 export const AdminContext = createContext<AdminContextType>({
@@ -72,7 +81,9 @@ export const AdminContext = createContext<AdminContextType>({
    appointments: [],
    setAppointments: () => {},
    getAllAppointments: async () => {},
-   cancelAppointment: async () => {}
+   cancelAppointment: async () => {},
+   dashData: null,
+   getDashData: async () => {}
 });
 
 const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }) => {
@@ -81,6 +92,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
    );
    const [doctors, setDoctors] = useState<Doctor[]>([]);
    const [appointments, setAppointments] = useState<Appointment[]>([]);
+   const [dashData, setDashData] = useState<DashData | null>(null);
 
    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -173,6 +185,26 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
       }
    };
 
+   const getDashData = async () => {
+      try {
+         const { data } = await axios.get(backendUrl + '/api/admin/dashboard', { headers: { aToken } });
+
+         if (data.success) {
+            setDashData(data.dashData);
+         } else {
+            toast.error(data.message);
+         }
+      } catch (error) {
+         if (error instanceof Error) {
+            toast.error(error.message);
+            console.log(error);
+         } else {
+            toast.error('An unknown error occurred');
+            console.log('Unknown error:', error);
+         }
+      }
+   };
+
    return (
       <AdminContext.Provider
          value={{
@@ -185,7 +217,9 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
             appointments,
             setAppointments,
             getAllAppointments,
-            cancelAppointment
+            cancelAppointment,
+            dashData,
+            getDashData
          }}
       >
          {children}
