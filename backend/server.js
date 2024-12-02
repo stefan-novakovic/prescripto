@@ -22,7 +22,7 @@ app.use("/api/admin", adminRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/user", userRouter);
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("API WORKING");
 });
 
