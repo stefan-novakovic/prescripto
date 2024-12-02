@@ -19,7 +19,7 @@ const AddDoctor = () => {
    const [address2, setAddress2] = useState<string>('');
    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-   const { backendUrl, aToken } = useAdminContext();
+   const { backendUrlAdmin, aToken } = useAdminContext();
 
    const resetForm = () => {
       setDocImg(null);
@@ -62,7 +62,7 @@ const AddDoctor = () => {
             console.log(`${key}: ${value}`);
          });
 
-         const { data } = await axios.post(backendUrl + `/api/admin/add-doctor`, formData, {
+         const { data } = await axios.post(backendUrlAdmin + `/api/admin/add-doctor`, formData, {
             headers: {
                aToken
             }

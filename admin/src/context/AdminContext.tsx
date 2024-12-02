@@ -59,7 +59,7 @@ type DashData = {
 type AdminContextType = {
    aToken: string | null;
    setAToken: React.Dispatch<React.SetStateAction<string | null>>;
-   backendUrl: string;
+   backendUrlAdmin: string;
    doctors: Doctor[];
    getAllDoctors: () => Promise<void>;
    changeAvailability: (docId: string) => Promise<void>;
@@ -74,7 +74,7 @@ type AdminContextType = {
 export const AdminContext = createContext<AdminContextType>({
    aToken: null,
    setAToken: () => {},
-   backendUrl: '',
+   backendUrlAdmin: '',
    doctors: [],
    getAllDoctors: async () => {},
    changeAvailability: async () => {},
@@ -94,11 +94,11 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
    const [appointments, setAppointments] = useState<Appointment[]>([]);
    const [dashData, setDashData] = useState<DashData | null>(null);
 
-   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+   const backendUrlAdmin = import.meta.env.VITE_BACKEND_URL;
 
    const getAllDoctors = async () => {
       try {
-         const { data } = await axios.post(backendUrl + '/api/admin/all-doctors', {}, { headers: { aToken } });
+         const { data } = await axios.post(backendUrlAdmin + '/api/admin/all-doctors', {}, { headers: { aToken } });
          if (data.success) {
             setDoctors(data.doctors);
          } else {
@@ -118,7 +118,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
    const changeAvailability = async (docId: string) => {
       try {
          const { data } = await axios.post(
-            backendUrl + '/api/admin/change-availability',
+            backendUrlAdmin + '/api/admin/change-availability',
             { docId },
             { headers: { aToken } }
          );
@@ -142,7 +142,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
 
    const getAllAppointments = async () => {
       try {
-         const { data } = await axios.get(backendUrl + '/api/admin/appointments', { headers: { aToken } });
+         const { data } = await axios.get(backendUrlAdmin + '/api/admin/appointments', { headers: { aToken } });
 
          if (data.success) {
             setAppointments(data.appointments);
@@ -163,7 +163,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
    const cancelAppointment = async (appointmentId: string) => {
       try {
          const { data } = await axios.post(
-            backendUrl + '/api/admin/cancel-appointment',
+            backendUrlAdmin + '/api/admin/cancel-appointment',
             { appointmentId },
             { headers: { aToken } }
          );
@@ -187,7 +187,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
 
    const getDashData = async () => {
       try {
-         const { data } = await axios.get(backendUrl + '/api/admin/dashboard', { headers: { aToken } });
+         const { data } = await axios.get(backendUrlAdmin + '/api/admin/dashboard', { headers: { aToken } });
 
          if (data.success) {
             setDashData(data.dashData);
@@ -210,7 +210,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
          value={{
             aToken,
             setAToken,
-            backendUrl,
+            backendUrlAdmin,
             doctors,
             getAllDoctors,
             changeAvailability,
