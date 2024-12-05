@@ -197,6 +197,20 @@ const cancelAppointment = async (req, res) => {
       return res.json({ success: false, message: "Unauthorized action" });
     }
 
+    if (appointmentData.isCompleted) {
+      return res.json({
+        success: false,
+        message: "Doctor marked this appointment as completed",
+      });
+    }
+
+    if (appointmentData.cancelled) {
+      return res.json({
+        success: false,
+        message: "Doctor or admin already cancelled this appointment",
+      });
+    }
+
     await appointmentModel.findByIdAndUpdate(appointmentId, {
       cancelled: true,
     });

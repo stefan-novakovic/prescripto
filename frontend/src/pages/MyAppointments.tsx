@@ -76,11 +76,11 @@ const MyAppointments = () => {
          );
          if (data.success) {
             toast.success(data.message);
-            getUserAppointments();
             getDoctorsData();
          } else {
             toast.error(data.message);
          }
+         getUserAppointments();
       } catch (error) {
          if (error instanceof Error) {
             toast.error(error.message);
@@ -133,18 +133,21 @@ const MyAppointments = () => {
                            Pay Online
                         </button>
                      )} */}
-                     {!appointment.cancelled && (
+                     {appointment.cancelled ? (
+                        <div className="text-sm sm:min-w-48 py-2 text-center border border-red-500 rounded text-red-500">
+                           Appointment cancelled
+                        </div>
+                     ) : appointment.isCompleted ? (
+                        <div className="text-sm sm:min-w-48 py-2 text-center border border-green-400 rounded text-green-400">
+                           Appointment completed
+                        </div>
+                     ) : (
                         <button
                            onClick={() => cancelAppointment(appointment._id)}
                            className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded  hover:bg-red-600 hover:text-white transition-all duration-300"
                         >
                            Cancel appointment
                         </button>
-                     )}
-                     {appointment.cancelled && (
-                        <div className="text-sm sm:min-w-48 py-2 text-center border border-red-500 rounded text-red-500">
-                           Appointment cancelled
-                        </div>
                      )}
                   </div>
                </div>

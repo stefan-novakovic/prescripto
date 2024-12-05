@@ -100,6 +100,7 @@ const Doctors = () => {
                         <div
                            key={index}
                            onClick={() => navigate(`/appointment/${doctor._id}`)}
+                           style={!doctor.available ? { opacity: 0.7 } : { opacity: 1 }}
                            className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
                         >
                            <img className="bg-blue-50" src={doctor.image} alt="" />
