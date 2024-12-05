@@ -203,7 +203,10 @@ const Appointment = () => {
          </div>
 
          {/* ----- Booking slots ----- */}
-         <div className="md:ml-72 md:pl-4 mt-4 font-medium text-gray-700">
+         <div
+            style={!docInfo.available ? { display: 'none' } : { display: 'block' }}
+            className="md:ml-72 md:pl-4 mt-4 font-medium text-gray-700"
+         >
             <p>Booking slots</p>
             <div id="bookingSlots" className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
                {docSlots.length &&

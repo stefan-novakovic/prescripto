@@ -167,13 +167,12 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
             { appointmentId },
             { headers: { aToken } }
          );
-
          if (data.success) {
             toast.success(data.message);
-            getAllAppointments();
          } else {
             toast.error(data.message);
          }
+         getAllAppointments();
       } catch (error) {
          if (error instanceof Error) {
             toast.error(error.message);
