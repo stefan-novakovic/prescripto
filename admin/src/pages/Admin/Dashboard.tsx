@@ -4,7 +4,7 @@ import { assets } from '../../assets/assets';
 import useAppContext from '../../hooks/useAppContext';
 
 const Dashboard = () => {
-   const { aToken, cancelAppointment, dashData, getDashData } = useAdminContext();
+   const { aToken, dashData, getDashData, cancelAppointment } = useAdminContext();
    const { slotDateFormat } = useAppContext();
 
    useEffect(() => {

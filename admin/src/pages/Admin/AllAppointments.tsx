@@ -11,7 +11,7 @@ const AllAppointments = () => {
       if (aToken) {
          getAllAppointments();
       }
-   }, [aToken]);
+   }, [aToken, appointments]);
    return (
       <div className="mx-5 my-4 w-full max-w-6xl">
          <p className="mb-3 text-lg font-medium">All Appointments</p>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import useAppContext from '../hooks/useAppContext';
-import { Doctor } from '../assets/assets';
+import { Doctor } from '../context/AppContext';
 
 type RelatedDoctorsProps = {
    docId: string | undefined;
