@@ -147,7 +147,7 @@ const Appointment = () => {
 
    useEffect(() => {
       getAvailableSlots();
-   }, [docInfo, docSlots]);
+   }, [docInfo]);
 
    useEffect(() => {
       if (docSlots.length > 0) {

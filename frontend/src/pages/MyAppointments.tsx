@@ -96,7 +96,7 @@ const MyAppointments = () => {
       if (token) {
          getUserAppointments();
       }
-   }, [token, appointments]);
+   }, [token]);
 
    return (
       <div className="flex flex-1 flex-col">
