@@ -11,7 +11,7 @@ const Dashboard = () => {
       if (aToken) {
          getDashData();
       }
-   }, [aToken, dashData]);
+   }, [aToken]);
 
    return (
       dashData && (

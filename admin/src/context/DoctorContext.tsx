@@ -164,7 +164,6 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
          const { data } = await axios.get(backendUrlDoctor + '/api/doctor/dashboard', { headers: { dToken } });
          if (data.success) {
             setDashData(data.dashData);
-            console.log(data.dashData);
          } else {
             toast.error(data.message);
          }
