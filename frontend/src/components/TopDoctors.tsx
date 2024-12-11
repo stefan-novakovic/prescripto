@@ -26,10 +26,10 @@ const TopDoctors = () => {
                      <img className="bg-blue-50" src={doctor.image} alt="" />
                      <div className="p-4">
                         <div
-                           className={`flex items-center gap-2 text-sm text-center ${doctor.available ? 'text-green-500' : 'text-red-500'}`}
+                           className={`flex items-center gap-2 text-sm text-center ${doctor.available ? 'text-green-500' : 'text-gray-600'}`}
                         >
                            <div
-                              className={`w-2 h-2 ${doctor.available ? 'bg-green-500' : 'bg-red-500'}  rounded-full`}
+                              className={`w-2 h-2 ${doctor.available ? 'bg-green-500' : 'bg-gray-600'}  rounded-full`}
                            />
                            <p>{doctor.available ? 'Available' : 'Not Available'}</p>
                         </div>

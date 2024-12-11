@@ -12,10 +12,7 @@ type Doctor = {
    about: string;
    available: boolean;
    fees: number;
-   address: {
-      line1: string;
-      line2: string;
-   };
+   address: { line1: string; line2: string };
    date: number;
    slots_booked: object;
    __v: number;
@@ -56,6 +53,8 @@ type DashData = {
    latestAppointments: Appointment[];
 };
 
+type ProfileData = Doctor;
+
 type DoctorContextType = {
    backendUrlDoctor: string;
    dToken: string | null;
@@ -68,6 +67,9 @@ type DoctorContextType = {
    dashData: DashData | null;
    setDashData: React.Dispatch<React.SetStateAction<DashData | null>>;
    getDashData: () => Promise<void>;
+   profileData: ProfileData | null;
+   setProfileData: React.Dispatch<React.SetStateAction<ProfileData | null>>;
+   getProfileData: () => Promise<void>;
 };
 
 export const DoctorContext = createContext<DoctorContextType>({
@@ -81,7 +83,10 @@ export const DoctorContext = createContext<DoctorContextType>({
    completeAppointment: async () => {},
    dashData: null,
    setDashData: () => {},
-   getDashData: async () => {}
+   getDashData: async () => {},
+   profileData: null,
+   setProfileData: () => {},
+   getProfileData: async () => {}
 });
 
 const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }) => {
@@ -91,6 +96,7 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
    );
    const [appointments, setAppointments] = useState<Appointment[]>([]);
    const [dashData, setDashData] = useState<DashData | null>(null);
+   const [profileData, setProfileData] = useState<ProfileData | null>(null);
 
    const getAppointments = async () => {
       try {
@@ -178,6 +184,24 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
       }
    };
 
+   const getProfileData = async () => {
+      try {
+         const { data } = await axios.get(backendUrlDoctor + '/api/doctor/profile', { headers: { dToken } });
+         if (data.success) {
+            setProfileData(data.profileData);
+            console.log(data.profileData);
+         }
+      } catch (error) {
+         if (error instanceof Error) {
+            toast.error(error.message);
+            console.log(error);
+         } else {
+            toast.error('An unknown error occurred');
+            console.log('Unknown error:', error);
+         }
+      }
+   };
+
    return (
       <DoctorContext.Provider
          value={{
@@ -191,7 +215,10 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
             cancelAppointment,
             dashData,
             setDashData,
-            getDashData
+            getDashData,
+            profileData,
+            setProfileData,
+            getProfileData
          }}
       >
          {children}
