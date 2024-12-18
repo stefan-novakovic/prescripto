@@ -10,7 +10,7 @@ const SpecialityMenu = () => {
          </p>
          <div
             id="specialityMenu"
-            className="flex c578:justify-center c640:justify-start c825:justify-center gap-4 pt-5 w-full overflow-x-scroll"
+            className="flex justify-start c588:flex-wrap c588:justify-center gap-4 pt-5 w-full overflow-x-scroll"
          >
             {specialityData.map((item, index) => (
                <Link
