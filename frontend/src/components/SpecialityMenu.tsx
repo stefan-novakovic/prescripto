@@ -5,8 +5,9 @@ const SpecialityMenu = () => {
    return (
       <section className="flex flex-col items-center gap-4 py-16 text-gray-800" id="speciality">
          <h1 className="text-3xl font-medium">Find by Speciality</h1>
-         <p className="sm:w-1/3 text-center text-sm">
-            Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+         <p className="sm:w-2/3 lg:w-2/5 text-center text-sm">
+            Simply browse through our extensive list of trusted doctors, schedule your appointment{' '}
+            <span className="whitespace-nowrap">hassle-free.</span>
          </p>
          <div
             id="specialityMenu"
@@ -19,7 +20,9 @@ const SpecialityMenu = () => {
                   key={index}
                   to={`/doctors/${item.speciality}`}
                >
-                  <img className="w-16 sm:w-24 mb-2" src={item.image} alt="" />
+                  <div className="w-16 h-16 sm:w-24 sm:h-24 mb-2">
+                     <img className="w-16 sm:w-24" src={item.image} alt="" />
+                  </div>
                   <p>{item.speciality}</p>
                </Link>
             ))}
