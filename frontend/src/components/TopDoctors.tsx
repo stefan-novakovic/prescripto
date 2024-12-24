@@ -11,7 +11,7 @@ const TopDoctors = () => {
          <p className="sm:w-2/3 lg:w-2/5 text-center text-sm">
             Simply browse through our extensive list of trusted doctors.
          </p>
-         <div className="w-full min-h-[346px] grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
+         <div className="w-full min-h-[700px] grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
             {doctors
                .sort((a, b) => (a.experience.split(' ')[0] > b.experience.split(' ')[0] ? -1 : 1))
                .slice(0, 10)

@@ -63,13 +63,15 @@ const Navbar = () => {
    });
 
    return (
-      <section className="h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400">
-         <img
-            onClick={() => navigate('/')}
-            className="w-36 sm:w-[148px] lg:w-44 py-4 cursor-pointer"
-            src={assets.logo}
-            alt=""
-         />
+      <section className="w-full 2xl:max-w-[1650px] 2xl:mx-auto h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400 3xl:px-10">
+         <div className="w-36 h-[62.52px] sm:w-[148px] sm:h-[63.36px] lg:w-44 lg:h-[69.3px]">
+            <img
+               onClick={() => navigate('/')}
+               className="w-36 sm:w-[148px] lg:w-44 py-4 cursor-pointer"
+               src={assets.logo}
+               alt=""
+            />
+         </div>
 
          <ul id="navMenu" className="hidden md:flex items-start gap-2 lg:gap-5 py-4 font-medium">
             <NavLink to="/">
@@ -107,8 +109,12 @@ const Navbar = () => {
                      onMouseLeave={handleMouseLeave}
                      className="float-end flex items-center gap-2 cursor-pointer group relative pb-6 mt-6"
                   >
-                     <img className="w-8 rounded-full" src={userData.image} alt="" />
-                     <img className="w-3" src={assets.dropdown_icon} alt="" />
+                     <div className="w-8 h-8 rounded-full">
+                        <img className="w-8 h-8 rounded-full" src={userData.image} alt="" />
+                     </div>
+                     <div className="w-3 h-[8.56px]">
+                        <img className="w-3" src={assets.dropdown_icon} alt="" />
+                     </div>
 
                      <div
                         onClick={(e) => e.stopPropagation()}
@@ -158,20 +164,17 @@ const Navbar = () => {
                      </button>
                      <button
                         onClick={() => navigate('/login')}
-                        className="text-[#000B6D] mr-[15px] rounded-full block md:hidden"
+                        className="text-[#000B6D] mr-[17px] rounded-full block md:hidden"
                      >
-                        <MdAccountCircle size={38} />
+                        <MdAccountCircle size={37} />
                      </button>
                   </>
                )}
             </div>
-            <div className="flex items-center">
-               <img
-                  onClick={() => setShowMobileMenu((prev) => !prev)}
-                  className="w-6 md:hidden h-min"
-                  src={assets.menu_icon}
-                  alt=""
-               />
+            <div className="flex items-center md:hidden">
+               <div onClick={() => setShowMobileMenu((prev) => !prev)} className="w-6 h-[17.5px]">
+                  <img className="w-6 h-min" src={assets.menu_icon} alt="" />
+               </div>
             </div>
             {/* ----- Mobile Menu ----- */}
             <div
@@ -179,16 +182,20 @@ const Navbar = () => {
                className={`${showMobileMenu ? 'translate-x-[0%]' : 'translate-x-[101%]'} fixed w-full sm:max-w-[400px] md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all duration-[650ms]`}
             >
                <div className="flex items-center justify-between pl-4 pr-[14px] py-[21.55px]">
-                  <img
-                     onClick={() => {
-                        navigate('/');
-                        setShowMobileMenu(false);
-                     }}
-                     className="w-36 sm:w-[148px] cursor-pointer"
-                     src={assets.logo}
-                     alt=""
-                  />
-                  <img className="w-7" onClick={() => setShowMobileMenu(false)} src={assets.cross_icon} alt="" />
+                  <div className="w-36 h-[30.52px] sm:w-[148px] sm:h-[31.36px]">
+                     <img
+                        onClick={() => {
+                           navigate('/');
+                           setShowMobileMenu(false);
+                        }}
+                        className="w-36 sm:w-[148px] cursor-pointer"
+                        src={assets.logo}
+                        alt=""
+                     />
+                  </div>
+                  <div className="w-7 h-7">
+                     <img className="w-7" onClick={() => setShowMobileMenu(false)} src={assets.cross_icon} alt="" />
+                  </div>
                </div>
                <ul className="flex flex-col items-center gap-2 mt-5 px-5 text-lg md:text-xl font-medium">
                   <NavLink

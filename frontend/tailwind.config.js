@@ -11,6 +11,7 @@ export default {
          },
          screens: {
             xs: '360px',
+            '3xl': '2000px',
             c588: '588px'
          }
       }

@@ -14,6 +14,14 @@
    @apply hidden;
 }
 
+#navMenu a:hover > hr {
+   @apply bg-primary/60;
+}
+
+#navMenu a:active > hr {
+   @apply bg-primary;
+}
+
 #navMenu a.active > hr {
    @apply bg-primary;
 }
