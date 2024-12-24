@@ -3,12 +3,14 @@ import { assets } from '../assets/assets';
 const Footer = () => {
    const currentYear: number = new Date().getFullYear();
    return (
-      <div className="md:mx-10">
-         <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
+      <div className="w-full 2xl:max-w-[1650px] 2xl:mx-auto">
+         <div className="flex flex-col md:grid md:grid-cols-[1.5fr_1fr_1fr] lg:grid-cols-[3fr_0.85fr_0.85fr] gap-8 md:gap-14 lg:px-10 my-10 mt-24 md:mt-32 text-sm">
             {/* ----- Left section ----- */}
             <div>
-               <img className="mb-5 w-40" src={assets.logo} alt="" />
-               <p className="w-full md:w-2/3 text-gray-600 leading-6">
+               <div className="w-40 h-[33.91px] mb-3">
+                  <img className="w-40" src={assets.logo} alt="" />
+               </div>
+               <p className="w-full lg:w-9/12 text-gray-600 leading-6">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                   industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                   scrambled it to make a type specimen book.
@@ -39,7 +41,14 @@ const Footer = () => {
          {/* ----- Copyright text ----- */}
          <div>
             <hr />
-            <p className="py-5 text-sm text-center">Copyright {currentYear}@ Prescripto - All Rights Reserved.</p>
+            <p className="py-5 text-sm text-center">
+               Copyright &copy; {currentYear} Prescripto
+               <br className="block xs:hidden" />
+               <span className="hidden xs:inline"> - </span>
+               <span className="whitespace-nowrap">
+                  All Rights Reserved<span className="hidden xs:inline">.</span>
+               </span>
+            </p>
          </div>
       </div>
    );
