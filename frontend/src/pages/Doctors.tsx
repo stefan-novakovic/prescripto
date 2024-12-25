@@ -41,7 +41,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'General physician' ? navigate(`/doctors`) : navigate(`/doctors/General physician`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'General physician' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'General physician' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   General physician
                </p>
@@ -49,7 +49,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Gynecologist' ? navigate(`/doctors`) : navigate(`/doctors/Gynecologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gynecologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gynecologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Gynecologist
                </p>
@@ -57,7 +57,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Dermatologist' ? navigate(`/doctors`) : navigate(`/doctors/Dermatologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Dermatologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Dermatologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Dermatologist
                </p>
@@ -65,7 +65,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Pediatricians' ? navigate(`/doctors`) : navigate(`/doctors/Pediatricians`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Pediatricians' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Pediatricians' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Pediatricians
                </p>
@@ -73,7 +73,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Neurologist' ? navigate(`/doctors`) : navigate(`/doctors/Neurologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Neurologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Neurologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Neurologist
                </p>
@@ -83,7 +83,7 @@ const Doctors = () => {
                         ? navigate(`/doctors`)
                         : navigate(`/doctors/Gastroenterologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gastroenterologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gastroenterologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Gastroenterologist
                </p>
