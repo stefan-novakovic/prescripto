@@ -2,7 +2,7 @@ import { assets } from '../assets/assets';
 
 const About = () => {
    return (
-      <section className="flex flex-1 flex-col w-full 2xl:max-w-[1650px] 2xl:mx-auto">
+      <section className="flex flex-1 flex-col w-full 2xl:max-w-[1650px] 2xl:mx-auto mb-24 md:mb-32">
          <div className="text-start text-2xl pt-4 md:pt-7 text-gray-500">
             <p>
                ABOUT <span className="text-gray-700 font-medium">US</span>
@@ -42,7 +42,7 @@ const About = () => {
             </p>
          </div>
 
-         <div className="flex flex-col md:flex-row mb:8 md:mb-12">
+         <div className="flex flex-col md:flex-row">
             <div className="border px-10 lg:px-16 py-8 lg:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer">
                <b>Efficiency:</b>
                <p>Streamlined appointment scheduling that fits into your busy lifestyle.</p>

@@ -31,6 +31,7 @@ const Banner = () => {
                className="absolute -bottom-0 -right-4 lg:right-0 min-w-[270px] xl:max-w-md"
                src={assets.appointment_img}
                alt=""
+               loading="lazy"
             />
          </div>
       </section>

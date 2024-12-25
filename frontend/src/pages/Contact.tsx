@@ -2,7 +2,7 @@ import { assets } from '../assets/assets';
 
 const Contact = () => {
    return (
-      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1650px] 2xl:mx-auto mb-8 md:mb-12">
+      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1650px] 2xl:mx-auto mb-24 md:mb-40">
          <div className="text-start text-2xl pt-4 md:pt-7 text-gray-500">
             <p>
                CONTACT <span className="text-gray-700 font-semibold">US</span>
@@ -25,7 +25,7 @@ const Contact = () => {
                </p>
                <p className="font-semibold text-lg text-gray-600">Careers at PRESCRIPTO</p>
                <p className="text-gray-500">Learn more about our teams and job openings.</p>
-               <button className="border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500">
+               <button className="border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-[350ms]">
                   Explore Jobs
                </button>
             </div>

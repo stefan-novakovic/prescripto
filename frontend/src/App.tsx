@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 const App = () => {
    return (
       <div className="flex flex-col min-h-[100vh] mx-4 sm:mx-[10%]">
-         <ToastContainer />
+         <ToastContainer autoClose={4000} pauseOnFocusLoss={false} stacked={true} />
          <Navbar />
 
          <Routes>
