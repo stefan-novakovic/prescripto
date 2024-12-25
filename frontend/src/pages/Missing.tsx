@@ -6,7 +6,7 @@ type MissingProps = {
 
 const Missing = ({ pod }: MissingProps) => {
    return (
-      <div className="flex flex-1 flex-col min-h-[calc(100vh-77px-16px)]">
+      <section className="flex flex-1 flex-col min-h-[calc(100vh-77px-16px)]">
          <h1 className="text-3xl font-bold my-6">{pod === 'page' ? 'Page' : 'Doctor'} Not Found</h1>
          <p className="mb-2">
             {pod === 'page'
@@ -16,7 +16,7 @@ const Missing = ({ pod }: MissingProps) => {
          <Link to={pod === 'page' ? '/' : '/doctors'} className="w-fit text-primary hover:underline">
             {pod === 'page' ? 'Go to Home page' : 'Go to All Doctors page'}
          </Link>
-      </div>
+      </section>
    );
 };
 export default Missing;

@@ -164,130 +164,128 @@ const Appointment = () => {
       }
    }, [docSlots]);
    return (
-      <>
-         <div className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
-            {/* ----- Doctor Details ----- */}
-            {!loadingDoctors && !fetchingDoctor && docInfo && (
-               <div className="flex flex-col md:flex-row gap-4 max-w-[411px] min-h-[288px] mx-auto md:max-w-none md:mx-0">
-                  <div className="flex justify-center w-full max-w-[411px] aspect-square md:aspect-auto md:w-72 md:h-72 bg-primary rounded-t-lg md:rounded-lg">
-                     <img
-                        className="w-full max-w-[411px] aspect-square md:w-72 md:h-72 md:aspect-auto"
-                        src={docInfo.image}
-                        alt=""
-                     />
+      <section className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
+         {/* ----- Doctor Details ----- */}
+         {!loadingDoctors && !fetchingDoctor && docInfo && (
+            <div className="flex flex-col md:flex-row gap-4 max-w-[411px] min-h-[288px] mx-auto md:max-w-none md:mx-0">
+               <div className="flex justify-center w-full max-w-[411px] aspect-square md:aspect-auto md:w-72 md:h-72 bg-primary rounded-t-lg md:rounded-lg">
+                  <img
+                     className="w-full max-w-[411px] aspect-square md:w-72 md:h-72 md:aspect-auto"
+                     src={docInfo.image}
+                     alt=""
+                  />
+               </div>
+
+               <div className="flex-1 min-h-72 max-w-[880px] border border-gray-400 rounded-b-lg md:rounded-lg p-7 bg-white -mt-5 md:mt-0">
+                  {/* ----- Doctor Info: name, degree, experience ----- */}
+                  <div className="flex items-center gap-2 text-2xl font-medium text-gray-900">
+                     {docInfo.name}
+                     <div className="w-5 h-5">
+                        <img className="w-5" src={assets.verified_icon} alt="" />
+                     </div>
                   </div>
-
-                  <div className="flex-1 min-h-72 max-w-[880px] border border-gray-400 rounded-b-lg md:rounded-lg p-7 bg-white -mt-5 md:mt-0">
-                     {/* ----- Doctor Info: name, degree, experience ----- */}
-                     <div className="flex items-center gap-2 text-2xl font-medium text-gray-900">
-                        {docInfo.name}
-                        <div className="w-5 h-5">
-                           <img className="w-5" src={assets.verified_icon} alt="" />
-                        </div>
-                     </div>
-                     <div className="flex items-center gap-2 text-sm mt-1 text-gray-600">
-                        <p>
-                           {docInfo.degree} - {docInfo.speciality}
-                        </p>
-                        <button className="py-0.5 px-2 border text-xs rounded-full">{docInfo.experience}</button>
-                     </div>
-
-                     {/* ----- Doctor About ----- */}
-                     <div>
-                        <div className="flex items-center gap-1 text-sm font-medium text-gray-900 mt-3">
-                           About{' '}
-                           <div className="w-[17px] h-[17px]">
-                              <img className="w-[17px]" src={assets.info_icon} alt="" />
-                           </div>
-                        </div>
-                        <p className="text-sm text-gray-500 mt-1">{docInfo.about}</p>
-                     </div>
-                     <p className="text-gray-500 font-medium mt-4">
-                        Appointment fee:{' '}
-                        <span className="text-gray-900">
-                           {currencySymbol}
-                           {docInfo.fees}
-                        </span>
+                  <div className="flex items-center gap-2 text-sm mt-1 text-gray-600">
+                     <p>
+                        {docInfo.degree} - {docInfo.speciality}
                      </p>
+                     <button className="py-0.5 px-2 border text-xs rounded-full">{docInfo.experience}</button>
                   </div>
-               </div>
-            )}
 
-            {/* ----- Booking slots ----- */}
-            {!loadingDoctors && !fetchingDoctor && docInfo && (
+                  {/* ----- Doctor About ----- */}
+                  <div>
+                     <div className="flex items-center gap-1 text-sm font-medium text-gray-900 mt-3">
+                        About{' '}
+                        <div className="w-[17px] h-[17px]">
+                           <img className="w-[17px]" src={assets.info_icon} alt="" />
+                        </div>
+                     </div>
+                     <p className="text-sm text-gray-500 mt-1">{docInfo.about}</p>
+                  </div>
+                  <p className="text-gray-500 font-medium mt-4">
+                     Appointment fee:{' '}
+                     <span className="text-gray-900">
+                        {currencySymbol}
+                        {docInfo.fees}
+                     </span>
+                  </p>
+               </div>
+            </div>
+         )}
+
+         {/* ----- Booking slots ----- */}
+         {!loadingDoctors && !fetchingDoctor && docInfo && (
+            <div
+               style={!docInfo.available ? { display: 'none' } : { display: 'block' }}
+               className="pl-0 lg:pl-[304px] mt-5 font-medium text-gray-700 w-full max-w-[1184px]"
+            >
+               <p>Booking slots</p>
                <div
-                  style={!docInfo.available ? { display: 'none' } : { display: 'block' }}
-                  className="pl-0 lg:pl-[304px] mt-5 font-medium text-gray-700 w-full max-w-[1184px]"
+                  id="bookingSlots"
+                  className="flex gap-x-[10px] gap-y-3 items-center h-[90px] w-full overflow-x-scroll mt-5"
                >
-                  <p>Booking slots</p>
-                  <div
-                     id="bookingSlots"
-                     className="flex gap-x-[10px] gap-y-3 items-center h-[90px] w-full overflow-x-scroll mt-5"
-                  >
-                     {docSlots.length > 0 &&
-                        docSlots.map((item, index) => {
-                           let offlineDayBoolean = Boolean(daysOfWeek[item[0]?.datetime.getDay()]);
-                           if (!offlineDayBoolean) {
-                              expiredDate.dayLetters = daysOfWeek[index + 1];
-                           }
+                  {docSlots.length > 0 &&
+                     docSlots.map((item, index) => {
+                        let offlineDayBoolean = Boolean(daysOfWeek[item[0]?.datetime.getDay()]);
+                        if (!offlineDayBoolean) {
+                           expiredDate.dayLetters = daysOfWeek[index + 1];
+                        }
 
-                           return (
-                              <button
-                                 disabled={offlineDayBoolean ? false : true}
-                                 key={index}
-                                 onClick={() => {
-                                    setSlotIndex(index);
-                                    setSlotTime('');
-                                 }}
-                                 className={`text-center py-5 min-w-16 rounded-full ${slotIndex === index && offlineDayBoolean ? 'bg-primary text-white' : !offlineDayBoolean ? 'border border-gray-100 bg-gray-100 text-gray-300 cursor-default' : 'border border-gray-200 hover:bg-primary/10 active:bg-primary/15'}`}
-                              >
-                                 <p>
-                                    {item[0] && daysOfWeek[item[0].datetime.getDay()]
-                                       ? daysOfWeek[item[0].datetime.getDay()]
-                                       : expiredDate.dayLetters}
-                                 </p>
-                                 <p>
-                                    {item[0] && item[0].datetime.getDate()
-                                       ? item[0].datetime.getDate()
-                                       : expiredDate.dayNumbers}
-                                 </p>
-                              </button>
-                           );
-                        })}
-                  </div>
-
-                  <div
-                     id="bookingSlotsTimes"
-                     className="flex items-center gap-x-2 gap-y-3 w-full h-[38px] lg:h-auto overflow-x-scroll lg:overflow-x-auto lg:flex-wrap mt-4"
-                  >
-                     {docSlots.length > 0 &&
-                        docSlots[slotIndex].map((item, index) => (
-                           <p
+                        return (
+                           <button
+                              disabled={offlineDayBoolean ? false : true}
                               key={index}
-                              onClick={() => setSlotTime(item.time)}
-                              className={`text-sm font-light flex-shrink-0 px-4 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white border border-transparent' : 'text-gray-400 border border-gray-300 hover:bg-primary/10 active:bg-primary/15'}`}
+                              onClick={() => {
+                                 setSlotIndex(index);
+                                 setSlotTime('');
+                              }}
+                              className={`text-center py-5 min-w-16 rounded-full ${slotIndex === index && offlineDayBoolean ? 'bg-primary text-white' : !offlineDayBoolean ? 'border border-gray-100 bg-gray-100 text-gray-300 cursor-default' : 'border border-gray-200 hover:bg-primary/10 active:bg-primary/15'}`}
                            >
-                              {item.time.toLowerCase()}
-                           </p>
-                        ))}
-                  </div>
-                  <button
-                     onClick={bookAppointment}
-                     className="bg-primary text-white tex-sm font-light px-14 py-3 w-[264.27px] h-12 rounded-full mt-6 grid place-content-center"
-                  >
-                     {submittingAppointment ? <ClipLoader size={24} color="white" /> : 'Book an appointment'}
-                  </button>
+                              <p>
+                                 {item[0] && daysOfWeek[item[0].datetime.getDay()]
+                                    ? daysOfWeek[item[0].datetime.getDay()]
+                                    : expiredDate.dayLetters}
+                              </p>
+                              <p>
+                                 {item[0] && item[0].datetime.getDate()
+                                    ? item[0].datetime.getDate()
+                                    : expiredDate.dayNumbers}
+                              </p>
+                           </button>
+                        );
+                     })}
                </div>
-            )}
 
-            {/* ----- Listing Related Doctors ----- */}
-            {!loadingDoctors && !fetchingDoctor && docInfo && (
-               <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
-            )}
+               <div
+                  id="bookingSlotsTimes"
+                  className="flex items-center gap-x-2 gap-y-3 w-full h-[38px] lg:h-auto overflow-x-scroll lg:overflow-x-auto lg:flex-wrap mt-4"
+               >
+                  {docSlots.length > 0 &&
+                     docSlots[slotIndex].map((item, index) => (
+                        <p
+                           key={index}
+                           onClick={() => setSlotTime(item.time)}
+                           className={`text-sm font-light flex-shrink-0 px-4 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white border border-transparent' : 'text-gray-400 border border-gray-300 hover:bg-primary/10 active:bg-primary/15'}`}
+                        >
+                           {item.time.toLowerCase()}
+                        </p>
+                     ))}
+               </div>
+               <button
+                  onClick={bookAppointment}
+                  className="bg-primary text-white tex-sm font-light px-14 py-3 w-[264.27px] h-12 rounded-full mt-6 grid place-content-center"
+               >
+                  {submittingAppointment ? <ClipLoader size={24} color="white" /> : 'Book an appointment'}
+               </button>
+            </div>
+         )}
 
-            {!loadingDoctors && !fetchingDoctor && !docInfo && <Missing pod="doctor" />}
-         </div>
-      </>
+         {/* ----- Listing Related Doctors ----- */}
+         {!loadingDoctors && !fetchingDoctor && docInfo && (
+            <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
+         )}
+
+         {!loadingDoctors && !fetchingDoctor && !docInfo && <Missing pod="doctor" />}
+      </section>
    );
 };
 export default Appointment;

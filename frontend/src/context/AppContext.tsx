@@ -42,7 +42,6 @@ type AppContextType = {
    setToken: React.Dispatch<React.SetStateAction<string | null>>;
    backendUrl: string;
    userData: UserData | null;
-   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
    loadUserProfileData: () => Promise<void>;
 };
 
@@ -55,7 +54,6 @@ export const AppContext = createContext<AppContextType>({
    setToken: () => {},
    backendUrl: '',
    userData: null,
-   setUserData: () => {},
    loadUserProfileData: async () => {}
 });
 
@@ -134,7 +132,6 @@ const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }
             setToken,
             backendUrl,
             userData,
-            setUserData,
             loadUserProfileData
          }}
       >

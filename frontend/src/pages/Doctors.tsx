@@ -25,7 +25,7 @@ const Doctors = () => {
       applyFilter();
    }, [doctors, speciality]);
    return (
-      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
+      <section className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40 min-h-[calc(100vh-77px-16px-96px)] md:min-h-[calc(100vh-77px-16px-160px)]">
          <p className="text-gray-600">Browse through the doctors specialist.</p>
          <div className="flex flex-col sm:flex-row items-stretch gap-5 mt-5">
             <button
@@ -126,7 +126,7 @@ const Doctors = () => {
                </div>
             )}
          </div>
-      </div>
+      </section>
    );
 };
 

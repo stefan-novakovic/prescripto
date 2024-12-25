@@ -3,7 +3,7 @@ import { assets } from '../assets/assets';
 const About = () => {
    return (
       <section className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-32">
-         <div className="text-start text-2xl pt-4 md:pt-7 text-gray-500">
+         <div className="text-start text-2xl pt-4 text-gray-500">
             <p>
                ABOUT <span className="text-gray-700 font-medium">US</span>
             </p>

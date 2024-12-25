@@ -9,7 +9,7 @@ const Banner = () => {
    const { token } = useAppContext();
 
    return (
-      <section className="flex bg-primary rounded-lg px-12 sm:px-20">
+      <div className="flex bg-primary rounded-lg px-12 sm:px-20">
          {/* ----- Left side ----- */}
          <div className="flex flex-col items-center md:items-start flex-1 py-16 xl:py-[116px] 2xl:py-[120px]">
             <div className="text-center md:text-start text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white">
@@ -18,13 +18,20 @@ const Banner = () => {
             </div>
             <button
                onClick={() => {
-                  !token ? (navigate('/login'), scrollTo(0, 0)) : scrollTo(0, 0),
-                     toast.info('You must log out first', {
-                        position: 'bottom-right',
-                        style: { position: 'relative' },
-                        autoClose: 3000,
-                        transition: Zoom
-                     });
+                  !token
+                     ? (navigate('/login'),
+                       scrollTo({
+                          top: 0,
+                          left: 0,
+                          behavior: 'instant'
+                       }))
+                     : (scrollTo(0, 0),
+                       toast.info('You must log out first', {
+                          position: 'bottom-right',
+                          style: { position: 'relative' },
+                          autoClose: 3000,
+                          transition: Zoom
+                       }));
                }}
                className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
             >
@@ -41,7 +48,7 @@ const Banner = () => {
                loading="lazy"
             />
          </div>
-      </section>
+      </div>
    );
 };
 export default Banner;

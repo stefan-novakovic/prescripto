@@ -156,7 +156,7 @@ const Login = () => {
                   className="bg-primary text-white w-full py-2 h-10 rounded-md text-base grid place-content-center active:bg-primary/90"
                >
                   {submitting ? (
-                     <ClipLoader size={20} color="white" />
+                     <ClipLoader size={18} color="white" />
                   ) : state === 'Sign up' ? (
                      'Create Account'
                   ) : (

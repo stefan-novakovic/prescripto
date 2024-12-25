@@ -3,7 +3,7 @@ import { specialityData } from '../assets/assets';
 
 const SpecialityMenu = () => {
    return (
-      <section className="flex flex-col items-center gap-4 py-16 text-gray-800" id="speciality">
+      <div className="flex flex-col items-center gap-4 py-16 text-gray-800" id="speciality">
          <h1 className="text-3xl font-medium">Find by Speciality</h1>
          <p className="sm:w-2/3 lg:w-2/5 text-center text-sm">
             Simply browse through our extensive list of trusted doctors, schedule your appointment{' '}
@@ -15,7 +15,13 @@ const SpecialityMenu = () => {
          >
             {specialityData.map((item, index) => (
                <Link
-                  onClick={() => scrollTo(0, 0)}
+                  onClick={() =>
+                     scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'instant'
+                     })
+                  }
                   className="flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:translate-y-[-10px] no-hover:translate-y-0 transition-all duration-500"
                   key={index}
                   to={`/doctors/${item.speciality}`}
@@ -27,7 +33,7 @@ const SpecialityMenu = () => {
                </Link>
             ))}
          </div>
-      </section>
+      </div>
    );
 };
 export default SpecialityMenu;

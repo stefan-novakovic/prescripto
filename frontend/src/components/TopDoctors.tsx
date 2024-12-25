@@ -6,7 +6,7 @@ const TopDoctors = () => {
    const { doctors } = useAppContext();
 
    return (
-      <section className="flex flex-col items-center gap-4 mt-8 mb-16 text-gray-900 md:mx-10">
+      <div className="flex flex-col items-center gap-4 mt-8 mb-16 text-gray-900 md:mx-10">
          <h1 className="text-3xl font-medium">Top Doctors to Book</h1>
          <p className="sm:w-2/3 lg:w-2/5 text-center text-sm">
             Simply browse through our extensive list of trusted doctors.
@@ -46,13 +46,17 @@ const TopDoctors = () => {
          <button
             onClick={() => {
                navigate('/doctors');
-               scrollTo(0, 0);
+               scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'instant'
+               });
             }}
             className="bg-blue-50 text-gray-600 px-12 py-3 rounded-full mt-10 hover:bg-slate-200 transition-all duration-300"
          >
             More
          </button>
-      </section>
+      </div>
    );
 };
 export default TopDoctors;

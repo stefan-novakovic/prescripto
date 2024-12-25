@@ -104,7 +104,7 @@ const MyAppointments = () => {
    }, [token]);
 
    return (
-      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
+      <section className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
          <p className="pb-3  font-medium text-zinc-700 border-b">My appointments</p>
 
          {loadingUserAppointments && (
@@ -171,7 +171,7 @@ const MyAppointments = () => {
                </div>
             )
          )}
-      </div>
+      </section>
    );
 };
 export default MyAppointments;
