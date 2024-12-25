@@ -2,7 +2,7 @@ import { assets } from '../assets/assets';
 
 const Contact = () => {
    return (
-      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1650px] 2xl:mx-auto mb-24 md:mb-40">
+      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
          <div className="text-start text-2xl pt-4 md:pt-7 text-gray-500">
             <p>
                CONTACT <span className="text-gray-700 font-semibold">US</span>

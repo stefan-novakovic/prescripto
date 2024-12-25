@@ -282,7 +282,7 @@ const AddDoctor = () => {
                type="submit"
                className="grid place-content-center min-w-40 bg-primary px-10 py-3 mt-4 text-white rounded-full"
             >
-               {isLoading ? <ClipLoader color="white" size={24} aria-label="Loading Spinner" /> : 'Add doctor'}
+               {isLoading ? <ClipLoader color="white" size={24} /> : 'Add doctor'}
             </button>
          </div>
       </form>

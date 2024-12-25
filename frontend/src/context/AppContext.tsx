@@ -35,6 +35,7 @@ export type Doctor = {
 
 type AppContextType = {
    doctors: Doctor[];
+   loadingDoctors: boolean;
    getDoctorsData: () => Promise<void>;
    currencySymbol: string;
    token: string | null;
@@ -47,6 +48,7 @@ type AppContextType = {
 
 export const AppContext = createContext<AppContextType>({
    doctors: [],
+   loadingDoctors: true,
    getDoctorsData: async () => {},
    currencySymbol: '',
    token: null,
@@ -59,6 +61,7 @@ export const AppContext = createContext<AppContextType>({
 
 const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }) => {
    const [doctors, setDoctors] = useState<Doctor[]>([]);
+   const [loadingDoctors, setLoadingDoctors] = useState<boolean>(true);
    const [token, setToken] = useState<string | null>(
       localStorage.getItem('token') ? localStorage.getItem('token') : null
    );
@@ -68,6 +71,7 @@ const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }
    const backendUrl: string = import.meta.env.VITE_BACKEND_URL;
 
    const getDoctorsData = async () => {
+      setLoadingDoctors(true);
       try {
          const { data } = await axios.get(backendUrl + '/api/doctor/list');
          if (data.success) {
@@ -83,6 +87,8 @@ const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }
             toast.error('An unknown error occurred');
             console.log('Unknown error:', error);
          }
+      } finally {
+         setLoadingDoctors(false);
       }
    };
 
@@ -121,6 +127,7 @@ const AppContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }
       <AppContext.Provider
          value={{
             doctors,
+            loadingDoctors,
             getDoctorsData,
             currencySymbol,
             token,

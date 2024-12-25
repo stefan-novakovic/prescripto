@@ -63,7 +63,7 @@ const Navbar = () => {
    });
 
    return (
-      <section className="w-full 2xl:max-w-[1650px] 2xl:mx-auto h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400 3xl:px-10">
+      <section className="w-full 2xl:max-w-[1550px] 2xl:mx-auto h-[77px] flex items-center justify-between text-sm mb-4 border-b border-b-gray-400 3xl:px-10">
          <div className="w-36 h-[62.52px] sm:w-[148px] sm:h-[63.36px] lg:w-44 lg:h-[69.3px]">
             <img
                onClick={() => navigate('/')}

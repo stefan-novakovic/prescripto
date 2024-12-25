@@ -5,7 +5,7 @@ import TopDoctors from '../components/TopDoctors';
 
 const Home = () => {
    return (
-      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1650px] 2xl:mx-auto mb-24 md:mb-32">
+      <div className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-32">
          <Header />
          <SpecialityMenu />
          <TopDoctors />

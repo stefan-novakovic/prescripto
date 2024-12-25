@@ -3,7 +3,7 @@ import { assets } from '../assets/assets';
 const Footer = () => {
    const currentYear: number = new Date().getFullYear();
    return (
-      <div className="w-full 2xl:max-w-[1650px] 2xl:mx-auto">
+      <div className="w-full 2xl:max-w-[1550px] 2xl:mx-auto">
          <div className="flex flex-col md:grid md:grid-cols-[1.5fr_1fr_1fr] lg:grid-cols-[3fr_0.85fr_0.85fr] gap-8 md:gap-14 lg:px-10 mb-10 text-sm">
             {/* ----- Left section ----- */}
             <div>
