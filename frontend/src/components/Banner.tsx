@@ -1,6 +1,7 @@
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import useAppContext from '../hooks/useAppContext';
+import { toast, Zoom } from 'react-toastify';
 
 const Banner = () => {
    const navigate: NavigateFunction = useNavigate();
@@ -17,7 +18,13 @@ const Banner = () => {
             </div>
             <button
                onClick={() => {
-                  !token ? (navigate('/login'), scrollTo(0, 0)) : scrollTo(0, 0);
+                  !token ? (navigate('/login'), scrollTo(0, 0)) : scrollTo(0, 0),
+                     toast.info('You must log out first', {
+                        position: 'bottom-right',
+                        style: { position: 'relative' },
+                        autoClose: 3000,
+                        transition: Zoom
+                     });
                }}
                className="bg-white text-sm sm:text-base text-gray-600 px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all"
             >

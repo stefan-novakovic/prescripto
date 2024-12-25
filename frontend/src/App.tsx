@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import Doctors from './pages/Doctors';
@@ -16,7 +16,13 @@ import Footer from './components/Footer';
 const App = () => {
    return (
       <div className="flex flex-col min-h-[100vh] mx-4 sm:mx-[10%]">
-         <ToastContainer autoClose={4000} pauseOnFocusLoss={false} stacked={true} />
+         <ToastContainer
+            position="top-right"
+            transition={Bounce}
+            autoClose={4000}
+            pauseOnFocusLoss={false}
+            stacked={true}
+         />
          <Navbar />
 
          <Routes>
