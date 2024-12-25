@@ -23,10 +23,10 @@ const TopDoctors = () => {
                         scrollTo(0, 0);
                      }}
                      style={!doctor.available ? { opacity: 0.65 } : { opacity: 1 }}
-                     className="min-h-[300px] border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+                     className="min-h-[300px] border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] no-hover:translate-y-0 transition-all duration-500"
                   >
                      <div className="bg-blue-50 w-full aspect-square flex justify-center items-end">
-                        <img src={doctor.image} alt="" loading="lazy" />
+                        <img src={doctor.image} alt="" className="w-full aspect-square" loading="lazy" />
                      </div>
                      <div className="p-4">
                         <div

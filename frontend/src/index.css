@@ -69,3 +69,11 @@
 .react-datepicker__year-dropdown--scrollable {
    height: 180px;
 }
+
+@layer utilities {
+   @media (pointer: coarse), (hover: none) {
+      .no-hover {
+         pointer-events: none;
+      }
+   }
+}
