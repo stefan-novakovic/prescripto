@@ -18,6 +18,11 @@ const Appointment = () => {
       dayNumbers: number | null;
    };
 
+   const { doctors, loadingDoctors, currencySymbol, backendUrl, token, getDoctorsData } = useAppContext();
+
+   const { docId } = useParams();
+   const navigate: NavigateFunction = useNavigate();
+
    const [docInfo, setDocInfo] = useState<Doctor | undefined>(undefined);
    const [docSlots, setDocSlots] = useState<DocSlots>([]);
    const [slotIndex, setSlotIndex] = useState<number>(0);
@@ -25,10 +30,7 @@ const Appointment = () => {
    const [fetchingDoctor, setFetchingDoctor] = useState<boolean>(true);
    const [submittingAppointment, setSubmittingAppointment] = useState<boolean>(false);
 
-   const { docId } = useParams();
-   const { doctors, loadingDoctors, currencySymbol, backendUrl, token, getDoctorsData } = useAppContext();
    const daysOfWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']; // Sunday-Saturday : 0-6 index when using getDay() method
-   const navigate: NavigateFunction = useNavigate();
 
    let expiredDate: ExpiredDate = {
       dayLetters: null,
@@ -110,8 +112,8 @@ const Appointment = () => {
 
    const bookAppointment = async () => {
       if (!token) {
-         toast.warn('Login to book appointment');
-         return navigate('/login');
+         toast.warn('Log in to book appointment');
+         return navigate('/login', { state: { from: location }, replace: true });
       }
 
       setSubmittingAppointment(true);

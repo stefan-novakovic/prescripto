@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import { useNavigate, NavigateFunction } from 'react-router-dom';
+import { useNavigate, useLocation, NavigateFunction, Location } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 import useAppContext from '../hooks/useAppContext';
 
@@ -10,6 +10,8 @@ const Login = () => {
    const { backendUrl, token, setToken } = useAppContext();
 
    const navigate: NavigateFunction = useNavigate();
+   const location: Location = useLocation();
+   const from = location.state?.from?.pathname || '/';
 
    const [state, setState] = useState<string>('Sign up');
    const [name, setName] = useState<string>('');
@@ -69,8 +71,8 @@ const Login = () => {
 
    useEffect(() => {
       if (token) {
-         navigate('/');
-         return;
+         if (from === '/') toast.warn('Already logged in');
+         return navigate(from, { replace: true });
       }
    }, [token]);
 

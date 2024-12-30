@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import useAppContext from '../hooks/useAppContext';
 import { Doctor, UserData } from '../context/AppContext';
+import { useNavigate, useLocation, NavigateFunction, Location } from 'react-router-dom';
 
 type Appointment = {
    _id: string;
@@ -23,6 +24,9 @@ type Appointment = {
 
 const MyAppointments = () => {
    const { backendUrl, token, getDoctorsData } = useAppContext();
+
+   const navigate: NavigateFunction = useNavigate();
+   const location: Location = useLocation();
 
    const [appointments, setAppointments] = useState<Appointment[]>([]);
    const [loadingUserAppointments, setLoadingUserAppoinments] = useState<boolean>(true);
@@ -100,9 +104,11 @@ const MyAppointments = () => {
    useEffect(() => {
       if (token) {
          getUserAppointments();
+      } else {
+         toast.warn('Log in to see this page');
+         return navigate('/login', { state: { from: location }, replace: true });
       }
    }, [token]);
-
    return (
       <section className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40">
          <p className="pb-3  font-medium text-zinc-700 border-b">My appointments</p>

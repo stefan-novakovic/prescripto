@@ -10,9 +10,14 @@ import useAppContext from '../hooks/useAppContext';
 import { assets } from '../assets/assets';
 import { UserData } from '../context/AppContext';
 import { ClipLoader } from 'react-spinners';
+import { useNavigate, useLocation, NavigateFunction, Location } from 'react-router-dom';
 
 const MyProfile = () => {
    const { userData, token, backendUrl, loadUserProfileData } = useAppContext();
+
+   const navigate: NavigateFunction = useNavigate();
+   const location: Location = useLocation();
+
    const [userImg, setUserImg] = useState<File | null>(null);
    const [isEdit, setIsEdit] = useState<boolean>(false);
    const [isSubmittingUserData, setIsSubmittingUserData] = useState<boolean>(false);
@@ -21,6 +26,13 @@ const MyProfile = () => {
    useEffect(() => {
       setNewFormData(userData);
    }, [userData, isEdit]);
+
+   useEffect(() => {
+      if (!token) {
+         toast.warn('Log in to see this page');
+         return navigate('/login', { state: { from: location }, replace: true });
+      }
+   }, [token]);
 
    const hasChanges = () => {
       if (userImg) return true;
