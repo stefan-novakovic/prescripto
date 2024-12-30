@@ -14,6 +14,14 @@
    @apply hidden;
 }
 
+#navMenu a:hover > hr {
+   @apply bg-primary/60;
+}
+
+#navMenu a:active > hr {
+   @apply bg-primary;
+}
+
 #navMenu a.active > hr {
    @apply bg-primary;
 }
@@ -60,4 +68,12 @@
 
 .react-datepicker__year-dropdown--scrollable {
    height: 180px;
+}
+
+@layer utilities {
+   @media (pointer: coarse), (hover: none) {
+      .no-hover {
+         pointer-events: none;
+      }
+   }
 }

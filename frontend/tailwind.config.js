@@ -10,9 +10,9 @@ export default {
             auto: 'repeat(auto-fill, minmax(200px, 1fr))'
          },
          screens: {
-            c578: '578px',
-            c640: '640px',
-            c825: '825px'
+            xs: '360px',
+            '3xl': '2000px',
+            c588: '588px'
          }
       }
    },

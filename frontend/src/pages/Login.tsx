@@ -2,13 +2,16 @@ import { FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import { useNavigate, NavigateFunction } from 'react-router-dom';
+import { useNavigate, useLocation, NavigateFunction, Location } from 'react-router-dom';
+import ClipLoader from 'react-spinners/ClipLoader';
 import useAppContext from '../hooks/useAppContext';
 
 const Login = () => {
    const { backendUrl, token, setToken } = useAppContext();
 
    const navigate: NavigateFunction = useNavigate();
+   const location: Location = useLocation();
+   const from = location.state?.from?.pathname || '/';
 
    const [state, setState] = useState<string>('Sign up');
    const [name, setName] = useState<string>('');
@@ -17,9 +20,14 @@ const Login = () => {
       value: ''
    });
    const [email, setEmail] = useState<string>('');
+   const [submitting, setSubmitting] = useState<boolean>(false);
 
    const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      if (submitting) return;
+
+      setSubmitting(true);
 
       try {
          if (state === 'Sign up') {
@@ -56,13 +64,15 @@ const Login = () => {
             toast.error('An unknown error occurred');
             console.log('Unknown error:', error);
          }
+      } finally {
+         setSubmitting(false);
       }
    };
 
    useEffect(() => {
       if (token) {
-         navigate('/');
-         return;
+         if (from === '/') toast.warn('Already logged in');
+         return navigate(from, { replace: true });
       }
    }, [token]);
 
@@ -75,9 +85,12 @@ const Login = () => {
    if (token) return null;
 
    return (
-      <section className="flex flex-1 flex-col justify-center">
-         <form className="flex items-center min-h-[75vh] mt-5 mb-10" onSubmit={onSubmitHandler}>
-            <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[288px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg">
+      <section className="flex flex-col justify-center">
+         <form
+            className="min-h-[calc(100vh-77px-16px-64px-80px)] mt-16 mb-[80px] grid place-content-center"
+            onSubmit={onSubmitHandler}
+         >
+            <div className="relative bottom-8 md:bottom-4 flex flex-col gap-3 mx-auto items-start p-8 w-full min-w-[288px] sm:min-w-96 max-w-[450px] border rounded-xl text-zinc-600 text-sm shadow-lg">
                <p className="text-2xl font-semibold">{state === 'Sign up' ? 'Create Account' : 'Login'}</p>
                <p>Please {state === 'Sign up' ? 'sign up' : 'log in'} to book appointment</p>
                {state === 'Sign up' && (
@@ -140,8 +153,17 @@ const Login = () => {
                   </div>
                </div>
 
-               <button type="submit" className="bg-primary text-white w-full py-2 rounded-md text-base">
-                  {state === 'Sign up' ? 'Create Account' : 'Login'}
+               <button
+                  type="submit"
+                  className="bg-primary text-white w-full py-2 h-10 rounded-md text-base grid place-content-center active:bg-primary/90"
+               >
+                  {submitting ? (
+                     <ClipLoader size={18} color="white" />
+                  ) : state === 'Sign up' ? (
+                     'Create Account'
+                  ) : (
+                     'Login'
+                  )}
                </button>
 
                {state === 'Sign up' ? (

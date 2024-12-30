@@ -7,25 +7,25 @@ const Doctors = () => {
    const { speciality } = useParams<string>();
    const [filterDoc, setFilterDoc] = useState<Doctor[]>([]);
    const [showFilter, setShowFilter] = useState<boolean>(false);
-   const [loading, setLoading] = useState<boolean>(true);
-   const { doctors } = useAppContext();
+   const [filtering, setFiltering] = useState<boolean>(true);
+   const { doctors, loadingDoctors } = useAppContext();
    const navigate: NavigateFunction = useNavigate();
 
    const applyFilter = () => {
-      setLoading(true);
+      setFiltering(true);
       if (speciality) {
          setFilterDoc(doctors.filter((doctor) => doctor.speciality === speciality));
       } else {
          setFilterDoc(doctors);
       }
-      setLoading(false);
+      setFiltering(false);
    };
 
    useEffect(() => {
       applyFilter();
    }, [doctors, speciality]);
    return (
-      <div className="flex flex-1 flex-col">
+      <section className="flex flex-1 flex-col w-full 2xl:max-w-[1550px] 2xl:mx-auto mb-24 md:mb-40 min-h-[calc(100vh-77px-16px-96px)] md:min-h-[calc(100vh-77px-16px-160px)]">
          <p className="text-gray-600">Browse through the doctors specialist.</p>
          <div className="flex flex-col sm:flex-row items-stretch gap-5 mt-5">
             <button
@@ -41,7 +41,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'General physician' ? navigate(`/doctors`) : navigate(`/doctors/General physician`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'General physician' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'General physician' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   General physician
                </p>
@@ -49,7 +49,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Gynecologist' ? navigate(`/doctors`) : navigate(`/doctors/Gynecologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gynecologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gynecologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Gynecologist
                </p>
@@ -57,7 +57,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Dermatologist' ? navigate(`/doctors`) : navigate(`/doctors/Dermatologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Dermatologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Dermatologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Dermatologist
                </p>
@@ -65,7 +65,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Pediatricians' ? navigate(`/doctors`) : navigate(`/doctors/Pediatricians`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Pediatricians' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Pediatricians' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Pediatricians
                </p>
@@ -73,7 +73,7 @@ const Doctors = () => {
                   onClick={() =>
                      speciality === 'Neurologist' ? navigate(`/doctors`) : navigate(`/doctors/Neurologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Neurologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Neurologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Neurologist
                </p>
@@ -83,16 +83,13 @@ const Doctors = () => {
                         ? navigate(`/doctors`)
                         : navigate(`/doctors/Gastroenterologist`)
                   }
-                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gastroenterologist' ? 'bg-indigo-100 text-black' : ''}`}
+                  className={`w-full sm:w-auto pl-3 pr-3 sm:pr-16 py-1.5 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'Gastroenterologist' ? 'bg-indigo-100 text-black' : 'hover:bg-indigo-50/25'}`}
                >
                   Gastroenterologist
                </p>
             </div>
-            {loading ? (
-               <div className="flex justify-center items-center w-full min-h-[72px] mt-[9.375rem] sm:mt-0 px-8 text-center font-semibold tracking-wide">
-                  Loading doctors...
-               </div>
-            ) : filterDoc.length > 0 ? (
+
+            {!loadingDoctors && !filtering && filterDoc.length > 0 && (
                <div className="w-full grid grid-cols-auto gap-4 gap-y-6">
                   {filterDoc
                      .sort((a, b) => (a.name > b.name ? 1 : -1))
@@ -101,9 +98,11 @@ const Doctors = () => {
                            key={index}
                            onClick={() => navigate(`/appointment/${doctor._id}`)}
                            style={!doctor.available ? { opacity: 0.7 } : { opacity: 1 }}
-                           className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+                           className="min-h-[300px] border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] no-hover:translate-y-0 transition-all duration-500"
                         >
-                           <img className="bg-blue-50" src={doctor.image} alt="" />
+                           <div className="bg-blue-50 w-full aspect-square flex justify-center items-end">
+                              <img src={doctor.image} alt="" className="w-full aspect-square" loading="lazy" />
+                           </div>
                            <div className="p-4">
                               <div
                                  className={`flex items-center gap-2 text-sm text-center ${doctor.available ? 'text-green-500' : 'text-gray-600'}`}
@@ -119,13 +118,15 @@ const Doctors = () => {
                         </div>
                      ))}
                </div>
-            ) : (
+            )}
+
+            {!loadingDoctors && !filtering && filterDoc.length === 0 && (
                <div className="flex justify-center items-center w-full min-h-[72px] mt-[9.375rem] sm:mt-0 px-8 text-center font-semibold text-red-600 tracking-wide">
                   The doctor speciality provided in the URL does not exist.
                </div>
             )}
          </div>
-      </div>
+      </section>
    );
 };
 

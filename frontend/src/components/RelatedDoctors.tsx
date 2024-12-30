@@ -20,7 +20,7 @@ const RelatedDoctors = ({ docId, speciality }: RelatedDoctorsProps) => {
       }
    }, [doctors, speciality, docId]);
    return (
-      <section className="flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10">
+      <div className="flex flex-col items-center gap-4 mt-20 text-gray-900 md:mx-10">
          <h1 className="text-3xl font-medium">Top Doctors to Book</h1>
          <p className="sm:w-1/3 text-center text-sm">Simply browse through our extensive list of trusted doctors.</p>
          {relDocs.length > 0 && (
@@ -36,9 +36,11 @@ const RelatedDoctors = ({ docId, speciality }: RelatedDoctorsProps) => {
                            scrollTo(0, 0);
                         }}
                         style={!doctor.available ? { opacity: 0.65 } : { opacity: 1 }}
-                        className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
+                        className="min-h-[300px] border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] no-hover:translate-y-0 transition-all duration-500"
                      >
-                        <img className="bg-blue-50" src={doctor.image} alt="" />
+                        <div className="bg-blue-50 w-full aspect-square flex justify-center items-end">
+                           <img src={doctor.image} alt="" className="w-full aspect-square" loading="lazy" />
+                        </div>
                         <div className="p-4">
                            <div
                               className={`flex items-center gap-2 text-sm text-center ${doctor.available ? 'text-green-500' : 'text-gray-600'}`}
@@ -58,13 +60,17 @@ const RelatedDoctors = ({ docId, speciality }: RelatedDoctorsProps) => {
          <button
             onClick={() => {
                navigate('/doctors');
-               scrollTo(0, 0);
+               scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'instant'
+               });
             }}
-            className="bg-blue-50 text-gray-600 px-12 py-3 rounded-full mt-10"
+            className="bg-blue-50 text-gray-600 px-12 py-3 rounded-full mt-10 hover:bg-slate-200 transition-all duration-300"
          >
             More
          </button>
-      </section>
+      </div>
    );
 };
 export default RelatedDoctors;
