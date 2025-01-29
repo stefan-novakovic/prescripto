@@ -5,6 +5,9 @@ export default {
       extend: {
          colors: {
             primary: '#5F6FFF'
+         },
+         screens: {
+            c375: '375px'
          }
       }
    },
