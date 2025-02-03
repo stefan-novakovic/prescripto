@@ -15,9 +15,9 @@ const Dashboard = () => {
 
    return (
       dashData && (
-         <div className="mx-5 my-4 w-full">
+         <section className="h-[calc(100vh-61px-48px)] sm:h-[calc(100vh-62.85px)] overflow-y-scroll px-2.5 sm:px-5 py-4 w-full">
             <div className="flex flex-wrap gap-3">
-               <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
+               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
                   <img className="w-14" src={assets.doctor_icon} alt="" />
                   <div>
                      <p className="text-xl font-semibold text-gray-600">{dashData.doctors}</p>
@@ -25,7 +25,7 @@ const Dashboard = () => {
                   </div>
                </div>
 
-               <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
+               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
                   <img className="w-14" src={assets.appointments_icon} alt="" />
                   <div>
                      <p className="text-xl font-semibold text-gray-600">{dashData.appointments}</p>
@@ -33,7 +33,7 @@ const Dashboard = () => {
                   </div>
                </div>
 
-               <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
+               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
                   <img className="w-14" src={assets.patients_icon} alt="" />
                   <div>
                      <p className="text-xl font-semibold text-gray-600">{dashData.patients}</p>
@@ -43,7 +43,7 @@ const Dashboard = () => {
             </div>
 
             <div className="bg-white">
-               <div className="flex items-center gap-2.5 px-4 py-4 mt-10 rounded-t border">
+               <div className="flex items-center gap-2.5 px-4 py-4 mt-4 sm:mt-8 rounded-t border">
                   <img src={assets.list_icon} alt="" />
                   <p className="font-semibold">Latest Bookings</p>
                </div>
@@ -73,7 +73,7 @@ const Dashboard = () => {
                   ))}
                </div>
             </div>
-         </div>
+         </section>
       )
    );
 };

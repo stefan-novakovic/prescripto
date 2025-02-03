@@ -1,15 +1,19 @@
-import { useState, FormEvent } from 'react';
-import { assets } from '../../assets/assets';
-import useAdminContext from '../../hooks/useAdminContext';
-import { toast } from 'react-toastify';
+import { useState, FormEvent, useRef } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
+import useAdminContext from '../../hooks/useAdminContext';
+import { assets } from '../../assets/assets';
 
 const AddDoctor = () => {
    const [docImg, setDocImg] = useState<File | null>(null);
    const [name, setName] = useState<string>('');
    const [email, setEmail] = useState<string>('');
-   const [password, setPassword] = useState<string>('');
+   const [password, setPassword] = useState<{ show: boolean; value: string }>({
+      show: false,
+      value: ''
+   });
    const [experience, setExperience] = useState<string>('1 Year');
    const [fees, setFees] = useState<string>('');
    const [about, setAbout] = useState<string>('');
@@ -21,11 +25,13 @@ const AddDoctor = () => {
 
    const { backendUrlAdmin, aToken } = useAdminContext();
 
+   const scrollRefAddDoctor = useRef<HTMLElement>(null);
+
    const resetForm = () => {
       setDocImg(null);
       setName('');
       setEmail('');
-      setPassword('');
+      setPassword({ value: '', show: false });
       setExperience('1 Year');
       setFees('');
       setSpeciality('General physician');
@@ -49,18 +55,13 @@ const AddDoctor = () => {
          formData.append('image', docImg);
          formData.append('name', name);
          formData.append('email', email);
-         formData.append('password', password);
+         formData.append('password', password.value);
          formData.append('experience', experience);
          formData.append('fees', fees);
          formData.append('speciality', speciality);
          formData.append('degree', degree);
          formData.append('address', JSON.stringify({ line1: address1, line2: address2 }));
          formData.append('about', about);
-
-         // console log formData
-         // formData.forEach((value, key) => {
-         //    console.log(`${key}: ${value}`);
-         // });
 
          const { data } = await axios.post(backendUrlAdmin + `/api/admin/add-doctor`, formData, {
             headers: {
@@ -71,6 +72,7 @@ const AddDoctor = () => {
          if (data.success) {
             toast.success(data.message);
             resetForm();
+            scrollRefAddDoctor?.current?.scrollTo({ top: 0, behavior: 'smooth' });
          } else {
             toast.error(data.message);
          }
@@ -88,10 +90,13 @@ const AddDoctor = () => {
    };
 
    return (
-      <form onSubmit={onSubmitHandler} className="mx-5 my-4 w-full">
+      <section
+         ref={scrollRefAddDoctor}
+         className="h-[calc(100vh-61px-48px)] sm:h-[calc(100vh-62.85px)] overflow-y-scroll px-2.5 sm:px-5 py-4 w-full"
+      >
          <p className="mb-3 text-lg font-medium">Add Doctor</p>
 
-         <div className="bg-white p-8 border rounded w-full max-w-6xl max-h-[calc(100vh-61px-32px-40px)] sm:max-h-[calc(100vh-62.86px-32px-40px)] overflow-y-scroll">
+         <form onSubmit={onSubmitHandler} className="bg-white p-5 sm:p-8 border rounded w-full max-w-6xl">
             <div className="flex items-center gap-4 mb-8 text-gray-500">
                <label htmlFor="doc-img" className="block w-16 h-16">
                   <img
@@ -150,16 +155,29 @@ const AddDoctor = () => {
                      <label className="block" htmlFor="doc-password">
                         Doctor Password
                      </label>
-                     <input
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        className="border rounded px-3 py-2"
-                        type="password"
-                        name="doc-password"
-                        id="doc-password"
-                        placeholder="Password"
-                        required
-                     />
+                     <div className="relative">
+                        <input
+                           className="border rounded w-full px-3 py-2 outline-none"
+                           type={password.show ? 'text' : 'password'}
+                           name="doc-password"
+                           id="doc-password"
+                           placeholder="Password"
+                           value={password.value}
+                           onChange={(e) => setPassword((prev) => ({ ...prev, value: e.target.value }))}
+                           required
+                        />
+                        <button
+                           type="button"
+                           onClick={() => setPassword((prev) => ({ ...prev, show: !password.show }))}
+                           className="absolute top-[50%] right-0 translate-x-[-14px] translate-y-[calc(-50%+2px)]"
+                        >
+                           {password.show ? (
+                              <MdVisibility size={18} className="text-zinc-400" />
+                           ) : (
+                              <MdVisibilityOff size={18} className="text-zinc-400" />
+                           )}
+                        </button>
+                     </div>
                   </div>
 
                   <div className="flex-1 flex flex-col gap-1">
@@ -269,7 +287,7 @@ const AddDoctor = () => {
                <textarea
                   onChange={(e) => setAbout(e.target.value)}
                   value={about}
-                  className="w-full px-4 pt-2 border rounded"
+                  className="w-full px-4 pt-2 border rounded resize-none"
                   name="doc-about"
                   id="doc-about"
                   placeholder="Write about doctor"
@@ -280,12 +298,12 @@ const AddDoctor = () => {
 
             <button
                type="submit"
-               className="grid place-content-center min-w-40 bg-primary px-10 py-3 mt-4 text-white rounded-full"
+               className="grid place-content-center h-12 min-w-40 bg-primary px-10 py-3 mt-4 text-white rounded-full"
             >
                {isLoading ? <ClipLoader color="white" size={24} /> : 'Add doctor'}
             </button>
-         </div>
-      </form>
+         </form>
+      </section>
    );
 };
 export default AddDoctor;

@@ -96,11 +96,12 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
 
    const backendUrlAdmin = import.meta.env.VITE_BACKEND_URL;
 
-   const getAllDoctors = async () => {
+   const getAllDoctors = async (changeAvailabilitySuccessMsg?: string) => {
       try {
          const { data } = await axios.post(backendUrlAdmin + '/api/admin/all-doctors', {}, { headers: { aToken } });
          if (data.success) {
             setDoctors(data.doctors);
+            toast.success(changeAvailabilitySuccessMsg);
          } else {
             toast.error(data.message);
          }
@@ -124,8 +125,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
          );
 
          if (data.success) {
-            toast.success(data.message);
-            getAllDoctors();
+            getAllDoctors(data.message);
          } else {
             toast.error(data.message);
          }
