@@ -31,7 +31,7 @@ const Navbar = () => {
                />
             </div>
 
-            <p className="hidden c375:block border px-2.5 py-0.5 mr-2 rounded-full border-gray-500 text-gray-600">
+            <p className="hidden c375:block border min-h-[22px] min-w-[60px] text-center px-2.5 py-0.5 mr-2 rounded-full border-gray-500 text-gray-600">
                {aToken ? 'Admin' : 'Doctor'}
             </p>
          </div>
