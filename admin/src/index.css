@@ -4,11 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ::-webkit-scrollbar {
-   @apply hidden;
-} */
-
 * {
    font-family: 'Outfit', sans-serif;
    font-optical-sizing: auto;
+}
+
+::-webkit-scrollbar {
+   @apply hidden;
 }

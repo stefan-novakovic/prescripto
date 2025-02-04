@@ -7,7 +7,8 @@ export default {
             primary: '#5F6FFF'
          },
          screens: {
-            c375: '375px'
+            c375: '375px',
+            hoverable: { raw: '(hover: hover) and (pointer: fine)' }
          }
       }
    },
