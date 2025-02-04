@@ -16,8 +16,8 @@ const Dashboard = () => {
    return (
       dashData && (
          <section className="h-[calc(100vh-61px-48px)] sm:h-[calc(100vh-62.85px)] overflow-y-scroll px-2.5 sm:px-5 py-4 w-full">
-            <div className="flex flex-wrap gap-3">
-               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
+            <div className="flex flex-wrap gap-3 max-w-6xl">
+               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hoverable:hover:scale-105 transition-all">
                   <div className="w-14 aspect-square">
                      <img className="w-14 h-14" src={assets.doctor_icon} alt="" />
                   </div>
@@ -27,7 +27,7 @@ const Dashboard = () => {
                   </div>
                </div>
 
-               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
+               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hoverable:hover:scale-105 transition-all">
                   <div className="w-14 aspect-square">
                      <img className="w-14 h-14" src={assets.appointments_icon} alt="" />
                   </div>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                   </div>
                </div>
 
-               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hover:scale-105 transition-all">
+               <div className="w-full c375:w-auto flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 hoverable:hover:scale-105 transition-all">
                   <div className="w-14 aspect-square">
                      <img className="w-14 h-14" src={assets.patients_icon} alt="" />
                   </div>
@@ -48,7 +48,7 @@ const Dashboard = () => {
                </div>
             </div>
 
-            <div className="bg-white">
+            <div className="bg-white max-w-6xl">
                <div className="flex items-center gap-2.5 px-4 py-4 mt-4 sm:mt-8 rounded-t border">
                   <div className="w-[22px] aspect-square">
                      <img src={assets.list_icon} className="w-[22px] h-[22px]" alt="" />
