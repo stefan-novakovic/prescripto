@@ -157,7 +157,7 @@ const AddDoctor = () => {
                      </label>
                      <div className="relative">
                         <input
-                           className="border rounded w-full px-3 py-2 outline-none"
+                           className="border rounded w-full px-3 py-2"
                            type={password.show ? 'text' : 'password'}
                            name="doc-password"
                            id="doc-password"
@@ -275,7 +275,6 @@ const AddDoctor = () => {
                         name="doc-address2"
                         id="doc-address2"
                         placeholder="Address 2"
-                        required
                      />
                   </div>
                </div>
