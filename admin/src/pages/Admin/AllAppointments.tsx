@@ -19,7 +19,7 @@ const AllAppointments = () => {
 
          <div className="overflow-x-scroll lg:overflow-auto">
             <div className="bg-white border rounded text-sm w-[920px] lg:w-full lg:max-w-6xl">
-               <div className="grid grid-cols-[0.5fr_2.75fr_0.85fr_2fr_2.75fr_0.85fr_1.25fr] grid-flow-col py-3 px-3 sm:px-6 border-b">
+               <div className="grid grid-cols-[0.45fr_2.55fr_0.625fr_1.825fr_3.25fr_0.825fr_1.15fr] grid-flow-col py-3 px-3 sm:px-6 border-b">
                   <p className="px-2">#</p>
                   <p className="px-2">Patient</p>
                   <p className="px-2">Age</p>
@@ -28,14 +28,15 @@ const AllAppointments = () => {
                   <p className="px-2">Fees</p>
                   <p className="px-2">Actions</p>
                </div>
+
                {appointments.length === 0 && <BarLoader width={'100%'} height={4} speedMultiplier={0.65} />}
                {[...appointments].reverse().map((item, index) => (
                   <div
-                     className="grid grid-cols-[0.5fr_2.75fr_0.85fr_2fr_2.75fr_0.85fr_1.25fr] items-center text-gray-500 py-3 px-3 sm:px-6 border-b hover:bg-gray-50"
+                     className="grid grid-cols-[0.45fr_2.55fr_0.625fr_1.825fr_3.25fr_0.825fr_1.15fr] items-center text-gray-500 py-3 px-3 sm:px-6 border-b hover:bg-gray-50"
                      key={index}
                   >
                      <p className="px-2 min-h-5">{index + 1}</p>
-                     <div className="flex items-center gap-2 px-2">
+                     <div className="flex items-center gap-2 pr-2 pl-0.5">
                         <div className="w-8 aspect-square rounded-full">
                            <img className="w-8 h-8 rounded-full" src={item.userData.image} alt="" />
                         </div>
