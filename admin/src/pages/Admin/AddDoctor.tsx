@@ -169,7 +169,7 @@ const AddDoctor = () => {
                         <button
                            type="button"
                            onClick={() => setPassword((prev) => ({ ...prev, show: !password.show }))}
-                           className="absolute top-[50%] right-0 translate-x-[-14px] translate-y-[calc(-50%+2px)]"
+                           className="absolute top-[50%] right-0 translate-x-[-14px] translate-y-[-50%]"
                         >
                            {password.show ? (
                               <MdVisibility size={18} className="text-zinc-400" />

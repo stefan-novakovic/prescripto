@@ -189,7 +189,6 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
          const { data } = await axios.get(backendUrlDoctor + '/api/doctor/profile', { headers: { dToken } });
          if (data.success) {
             setProfileData(data.profileData);
-            console.log(data.profileData);
          }
       } catch (error) {
          if (error instanceof Error) {
