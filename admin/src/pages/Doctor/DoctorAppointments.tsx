@@ -17,10 +17,10 @@ const DoctorAppointments = () => {
       <section className="h-[calc(100vh-61px-48px)] sm:h-[calc(100vh-62.85px)] overflow-y-scroll px-2.5 sm:px-5 py-4 w-full">
          <p className="mb-3 text-lg font-medium">All Appointments</p>
 
-         <div className="overflow-x-scroll lg:overflow-auto">
+         <div className="overflow-scroll lg:overflow-auto">
             <div className="bg-white border rounded text-sm w-[920px] lg:w-full lg:max-w-6xl">
-               <div className="grid grid-cols-[0.45fr_2.55fr_1.05fr_0.625fr_1.825fr_0.825fr_1.25fr] grid-flow-col py-3 px-3 sm:px-6 border-b">
-                  <p className="px-2">#</p>
+               <div className="grid grid-cols-[0.3fr_0.2fr_0.125fr_0.325fr_0.125fr_0.2fr] sm:grid-cols-[0.4fr_2.55fr_1.05fr_0.625fr_1.875fr_0.825fr_1.25fr] grid-flow-col py-3 px-3 sm:px-6 border-b">
+                  <p className="hidden sm:block pr-2">#</p>
                   <p className="px-2">Patient</p>
                   <p className="px-2">Payment</p>
                   <p className="px-2">Age</p>
@@ -32,10 +32,10 @@ const DoctorAppointments = () => {
                {appointments.length === 0 && <BarLoader width={'100%'} height={4} speedMultiplier={0.65} />}
                {[...appointments].reverse().map((item, index) => (
                   <div
-                     className="grid grid-cols-[0.45fr_2.55fr_1.05fr_0.625fr_1.825fr_0.825fr_1.25fr] items-center text-gray-500 py-3 px-3 sm:px-6 border-b hover:bg-gray-50"
+                     className="grid grid-cols-[0.3fr_0.2fr_0.125fr_0.325fr_0.125fr_0.2fr] sm:grid-cols-[0.4fr_2.55fr_1.05fr_0.625fr_1.875fr_0.825fr_1.25fr] items-center text-gray-500 py-3 px-3 sm:px-6 border-b hover:bg-gray-50"
                      key={index}
                   >
-                     <p className="px-2 min-h-5">{index + 1}</p>
+                     <p className="hidden sm:block pr-2 min-h-5">{index + 1}</p>
                      <div className="flex items-center gap-2 pr-2 pl-0.5">
                         <div className="min-w-8 aspect-square rounded-full">
                            <img className="w-8 h-8 rounded-full" src={item.userData.image} alt="" />
