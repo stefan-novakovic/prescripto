@@ -10,7 +10,7 @@ const Login = () => {
    const { aToken, setAToken, backendUrlAdmin } = useAdminContext();
    const { dToken, setDToken, backendUrlDoctor } = useDoctorContext();
 
-   const [state, setState] = useState<string>('Admin');
+   const [state, setState] = useState<string>(localStorage.getItem('login') || 'Admin');
    const [email, setEmail] = useState<string>('');
    const [password, setPassword] = useState<{ show: boolean; value: string }>({
       show: false,
@@ -71,7 +71,7 @@ const Login = () => {
    if (dToken) return null;
 
    return (
-      <section className="flex justify-center mx-4 sm:mx-[10%]">
+      <section className="flex flex-1 justify-center mx-4 sm:mx-[10%]">
          <form
             className="w-full min-h-[calc(100vh-64px-64px)] my-16 flex items-center justify-center"
             onSubmit={onSubmitHandler}
@@ -136,6 +136,7 @@ const Login = () => {
                         className="text-primary underline cursor-pointer"
                         onClick={() => {
                            setState('Doctor');
+                           localStorage.setItem('login', 'Doctor');
                            resetInputs();
                         }}
                      >
@@ -149,6 +150,7 @@ const Login = () => {
                         className="text-primary underline cursor-pointer"
                         onClick={() => {
                            setState('Admin');
+                           localStorage.setItem('login', 'Admin');
                            resetInputs();
                         }}
                      >
