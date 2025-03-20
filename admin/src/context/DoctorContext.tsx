@@ -61,6 +61,7 @@ type DoctorContextType = {
    setDToken: React.Dispatch<React.SetStateAction<string | null>>;
    appointments: Appointment[];
    setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
+   loadingDoctorAppointments: boolean;
    getAppointments: () => Promise<void>;
    completeAppointment: (appointmentId: string) => Promise<void>;
    cancelAppointment: (appointmentId: string) => Promise<void>;
@@ -78,6 +79,7 @@ export const DoctorContext = createContext<DoctorContextType>({
    setDToken: () => {},
    appointments: [],
    setAppointments: () => {},
+   loadingDoctorAppointments: true,
    getAppointments: async () => {},
    cancelAppointment: async () => {},
    completeAppointment: async () => {},
@@ -95,10 +97,13 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
       localStorage.getItem('dToken') ? localStorage.getItem('dToken') : null
    );
    const [appointments, setAppointments] = useState<Appointment[]>([]);
+   const [loadingDoctorAppointments, setLoadingDoctorAppointments] = useState<boolean>(true);
    const [dashData, setDashData] = useState<DashData | null>(null);
    const [profileData, setProfileData] = useState<ProfileData | null>(null);
 
    const getAppointments = async () => {
+      setLoadingDoctorAppointments(true);
+
       try {
          const { data } = await axios.get(backendUrlDoctor + '/api/doctor/appointments', { headers: { dToken } });
          if (data.success) {
@@ -114,6 +119,8 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
             toast.error('An unknown error occurred');
             console.log('Unknown error:', error);
          }
+      } finally {
+         setLoadingDoctorAppointments(false);
       }
    };
 
@@ -209,6 +216,7 @@ const DoctorContextProvider = ({ children }: { children?: ReactNode | ReactNode[
             setDToken,
             appointments,
             setAppointments,
+            loadingDoctorAppointments,
             getAppointments,
             completeAppointment,
             cancelAppointment,
