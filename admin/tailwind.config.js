@@ -8,6 +8,7 @@ export default {
          },
          screens: {
             c375: '375px',
+            c450: '450px',
             hoverable: { raw: '(hover: hover) and (pointer: fine)' }
          }
       }

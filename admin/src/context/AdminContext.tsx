@@ -62,13 +62,16 @@ type AdminContextType = {
    backendUrlAdmin: string;
    doctors: Doctor[];
    getAllDoctors: () => Promise<void>;
+   loadingAllDoctors: boolean;
    changeAvailability: (docId: string) => Promise<void>;
    appointments: Appointment[];
    setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
+   loadingAppointments: boolean;
    getAllAppointments: () => Promise<void>;
    cancelAppointment: (appointmentId: string) => Promise<void>;
    dashData: DashData | null;
    getDashData: () => Promise<void>;
+   getUpdatedDoctor: (docId: string, changeAvailabilitySuccessMsg: string) => Promise<void>;
 };
 
 export const AdminContext = createContext<AdminContextType>({
@@ -77,13 +80,16 @@ export const AdminContext = createContext<AdminContextType>({
    backendUrlAdmin: '',
    doctors: [],
    getAllDoctors: async () => {},
+   loadingAllDoctors: true,
    changeAvailability: async () => {},
    appointments: [],
    setAppointments: () => {},
+   loadingAppointments: true,
    getAllAppointments: async () => {},
    cancelAppointment: async () => {},
    dashData: null,
-   getDashData: async () => {}
+   getDashData: async () => {},
+   getUpdatedDoctor: async () => {}
 });
 
 const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[] }) => {
@@ -91,16 +97,47 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
       localStorage.getItem('aToken') ? localStorage.getItem('aToken') : null
    );
    const [doctors, setDoctors] = useState<Doctor[]>([]);
+   const [loadingAllDoctors, setLoadingAllDoctors] = useState<boolean>(true);
    const [appointments, setAppointments] = useState<Appointment[]>([]);
+   const [loadingAppointments, setLoadingAppointments] = useState<boolean>(true);
    const [dashData, setDashData] = useState<DashData | null>(null);
 
    const backendUrlAdmin = import.meta.env.VITE_BACKEND_URL;
 
    const getAllDoctors = async (changeAvailabilitySuccessMsg?: string) => {
+      setLoadingAllDoctors(true);
+
       try {
          const { data } = await axios.post(backendUrlAdmin + '/api/admin/all-doctors', {}, { headers: { aToken } });
          if (data.success) {
             setDoctors(data.doctors);
+            toast.success(changeAvailabilitySuccessMsg);
+         } else {
+            toast.error(data.message);
+         }
+      } catch (error) {
+         if (error instanceof Error) {
+            toast.error(error.message);
+            console.log(error);
+         } else {
+            toast.error('An unknown error occurred');
+            console.log('Unknown error:', error);
+         }
+      } finally {
+         setLoadingAllDoctors(false);
+      }
+   };
+
+   const getUpdatedDoctor = async (docId: string, changeAvailabilitySuccessMsg: string) => {
+      try {
+         const { data } = await axios.post(
+            backendUrlAdmin + '/api/admin/updated-doctor',
+            { docId },
+            { headers: { aToken } }
+         );
+         if (data.success) {
+            const updatedDoctor: Doctor = data.doctor;
+            setDoctors((prev) => prev.map((doctor) => (doctor._id === updatedDoctor?._id ? updatedDoctor : doctor)));
             toast.success(changeAvailabilitySuccessMsg);
          } else {
             toast.error(data.message);
@@ -125,7 +162,7 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
          );
 
          if (data.success) {
-            getAllDoctors(data.message);
+            getUpdatedDoctor(docId, data.message);
          } else {
             toast.error(data.message);
          }
@@ -141,6 +178,8 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
    };
 
    const getAllAppointments = async () => {
+      setLoadingAppointments(true);
+
       try {
          const { data } = await axios.get(backendUrlAdmin + '/api/admin/appointments', { headers: { aToken } });
 
@@ -157,6 +196,8 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
             toast.error('An unknown error occurred');
             console.log('Unknown error:', error);
          }
+      } finally {
+         setLoadingAppointments(false);
       }
    };
 
@@ -212,13 +253,16 @@ const AdminContextProvider = ({ children }: { children?: ReactNode | ReactNode[]
             backendUrlAdmin,
             doctors,
             getAllDoctors,
+            loadingAllDoctors,
             changeAvailability,
             appointments,
             setAppointments,
+            loadingAppointments,
             getAllAppointments,
             cancelAppointment,
             dashData,
-            getDashData
+            getDashData,
+            getUpdatedDoctor
          }}
       >
          {children}

@@ -71,12 +71,12 @@ const Login = () => {
    if (dToken) return null;
 
    return (
-      <section className="flex flex-1 justify-center mx-4 sm:mx-[10%]">
+      <section className="flex flex-1 justify-center w-full max-w-[304px] sm:max-w-96 ms mx-auto">
          <form
             className="w-full min-h-[calc(100vh-64px-64px)] my-16 flex items-center justify-center"
             onSubmit={onSubmitHandler}
          >
-            <div className="w-full flex flex-col gap-3 items-start p-8 max-w-96 sm:w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg">
+            <div className="w-full flex flex-col gap-3 items-start px-5 py-8 sm:p-8 border rounded-xl text-[#5E5E5E] text-sm shadow-lg">
                <p className="w-full text-2xl font-semibold text-center">
                   <span className="text-primary">{state}</span> Login
                </p>

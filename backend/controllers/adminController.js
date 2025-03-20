@@ -118,6 +118,19 @@ const allDoctors = async (_, res) => {
   }
 };
 
+// API to get doctor with updated info
+const updatedDoctor = async (req, res) => {
+  try {
+    const { docId } = req.body;
+    const doctor = await doctorModel.findById(docId);
+    console.log(doctor);
+    res.json({ success: true, doctor });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 // API to get all appointments list
 const appointmentsAdmin = async (_, res) => {
   try {
@@ -192,6 +205,7 @@ export {
   addDoctor,
   loginAdmin,
   allDoctors,
+  updatedDoctor,
   appointmentsAdmin,
   appointmentCancel,
   adminDashboard,
